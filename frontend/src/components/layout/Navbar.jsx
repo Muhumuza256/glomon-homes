@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X, Phone, MessageCircle, Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
-import logo from '../../assets/logo.svg'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -76,14 +75,18 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link to="/" className="flex items-center">
-              <img
-                src={logo}
-                alt="Glomon Homes"
-                className="h-10 w-auto"
-                style={transparent ? { filter: 'brightness(0) invert(1)' } : undefined}
-              />
+            {/* Wordmark */}
+            <Link to="/" className="flex flex-col leading-none group">
+              <span className={`font-display font-bold text-[19px] tracking-[0.04em] transition-colors ${
+                transparent ? 'text-white' : 'text-primary'
+              }`}>
+                Glomon<span className={transparent ? 'text-[#F97316]' : 'text-accent'}> Homes</span>
+              </span>
+              <span className={`text-[8.5px] font-semibold tracking-[0.28em] uppercase transition-colors ${
+                transparent ? 'text-white/55' : 'text-accent/70'
+              }`}>
+                Real Estate
+              </span>
             </Link>
 
             {/* Desktop nav */}

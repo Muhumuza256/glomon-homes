@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom'
 import { Phone, Mail, MapPin, Facebook, Instagram, Twitter, Youtube, MessageCircle } from 'lucide-react'
-import logo from '../../assets/logo.svg'
 
 const QUICK_LINKS = [
   { to: '/', label: 'Home' },
@@ -28,13 +27,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="mb-5">
-              <img
-                src={logo}
-                alt="Glomon Homes"
-                className="h-12 w-auto"
-                style={{ filter: 'brightness(0) invert(1)' }}
-              />
+            <div className="mb-5 flex flex-col leading-none">
+              <span className="font-display font-bold text-[22px] tracking-[0.04em] text-white">
+                Glomon<span className="text-[#F97316]"> Homes</span>
+              </span>
+              <span className="text-[8.5px] font-semibold tracking-[0.28em] uppercase text-[#F97316]/60 mt-0.5">
+                Real Estate
+              </span>
             </div>
             <p className="text-white/65 text-sm leading-relaxed max-w-xs mb-6">
               Find Your Place in Uganda. Verified property listings across Kampala, Wakiso, Entebbe, Mukono and beyond.
