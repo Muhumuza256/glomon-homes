@@ -5,14 +5,13 @@ import { useAuth } from '../context/AuthContext'
 import api from '../services/api'
 import Spinner from '../components/ui/Spinner'
 
-// Hardcoded admin credentials — replace with env-driven check when backend is ready
-const ADMIN_EMAIL = 'admin@glomonhomes.com'
-const ADMIN_PASSWORD = 'GlomonAdmin2025!'
+const HARDCODED_EMAIL = 'admin@glomonhomes.com'
+const HARDCODED_PASSWORD = 'GlomonAdmin2025!'
 
 export default function AdminLoginPage() {
   const { login, loginLocal, isAuthenticated } = useAuth()
   const navigate = useNavigate()
-  const [email, setEmail] = useState(ADMIN_EMAIL)
+  const [email, setEmail] = useState(HARDCODED_EMAIL)
   const [password, setPassword] = useState('')
   const [showPw, setShowPw] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -27,17 +26,23 @@ export default function AdminLoginPage() {
     setError('')
     setLoading(true)
     try {
-      // Try the real backend first — gives a proper JWT for API calls
+      // Always try the real backend first
       const res = await api.post('/api/auth/login', { email, password })
       login(res.data.token)
       navigate('/admin/dashboard')
-    } catch {
-      // Backend unavailable or wrong creds — fall back to hardcoded check
-      if (email.trim() === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-        loginLocal()
-        navigate('/admin/dashboard')
+    } catch (err) {
+      const isNetworkError = !err.response // no response = backend unreachable
+      if (isNetworkError) {
+        // Backend is down — allow hardcoded credentials as offline fallback
+        if (email.trim() === HARDCODED_EMAIL && password === HARDCODED_PASSWORD) {
+          loginLocal()
+          navigate('/admin/dashboard')
+        } else {
+          setError('Cannot reach server. Use the default credentials to access offline mode.')
+        }
       } else {
-        setError('Invalid email or password.')
+        // Backend responded with an error (401, 400, etc.) — show that message
+        setError(err.response?.data?.error ?? 'Invalid email or password.')
       }
     } finally {
       setLoading(false)
@@ -46,7 +51,6 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-primary flex items-center justify-center px-4">
-      {/* Ambient glow */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
       </div>
@@ -66,8 +70,8 @@ export default function AdminLoginPage() {
           <h2 className="font-display font-semibold text-text-main text-lg mb-6">Sign in</h2>
 
           {error && (
-            <div className="flex items-center gap-2 bg-red-50 border border-red-100 text-red-700 text-sm px-4 py-3 rounded-btn mb-5">
-              <AlertCircle size={15} className="shrink-0" />
+            <div className="flex items-start gap-2 bg-red-50 border border-red-100 text-red-700 text-sm px-4 py-3 rounded-btn mb-5">
+              <AlertCircle size={15} className="shrink-0 mt-0.5" />
               {error}
             </div>
           )}
@@ -119,13 +123,13 @@ export default function AdminLoginPage() {
 
           <div className="mt-5 pt-4 border-t border-border text-center">
             <p className="text-[11px] text-text-muted">
-              Default password:{' '}
+              Password hint:{' '}
               <button
                 type="button"
-                onClick={() => setPassword(ADMIN_PASSWORD)}
+                onClick={() => setPassword(HARDCODED_PASSWORD)}
                 className="font-mono text-primary hover:underline"
               >
-                GlomonAdmin2025!
+                fill default
               </button>
             </p>
           </div>

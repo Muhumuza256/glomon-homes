@@ -25,25 +25,27 @@ function StatCard({ icon: Icon, label, value, color, loading }) {
 export default function AdminDashboard() {
   const [stats, setStats] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [apiError, setApiError] = useState('')
 
   useEffect(() => {
     async function fetchStats() {
       try {
-        const [propsRes, enquiriesRes, newEnquiriesRes] = await Promise.all([
+        const [allPropsRes, activePropsRes, enquiriesRes, newEnquiriesRes] = await Promise.all([
           api.get('/api/properties/admin/all?limit=1'),
+          api.get('/api/properties?limit=1'),
           api.get('/api/enquiries?limit=1'),
           api.get('/api/enquiries?status=NEW&limit=1'),
         ])
-        // Count active by fetching public endpoint (only returns ACTIVE)
-        const activeRes = await api.get('/api/properties?limit=1')
         setStats({
-          total: propsRes.data.total,
-          active: activeRes.data.total,
-          enquiries: enquiriesRes.data.total,
+          total:        allPropsRes.data.total,
+          active:       activePropsRes.data.total,
+          enquiries:    enquiriesRes.data.total,
           newEnquiries: newEnquiriesRes.data.total,
         })
-      } catch {
-        // Backend not reachable
+      } catch (err) {
+        if (err.response?.status === 401) {
+          setApiError('Session expired or no JWT — please log out and sign in again to see live stats.')
+        }
         setStats({ total: null, active: null, enquiries: null, newEnquiries: null })
       } finally {
         setLoading(false)
@@ -55,36 +57,20 @@ export default function AdminDashboard() {
   return (
     <AdminLayout title="Dashboard">
       <div className="max-w-5xl space-y-8">
+
+        {apiError && (
+          <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 text-amber-800 text-sm px-4 py-3 rounded-btn">
+            <AlertCircle size={15} className="shrink-0 mt-0.5" />
+            {apiError}
+          </div>
+        )}
+
         {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <StatCard
-            icon={Building2}
-            label="Total Properties"
-            value={stats?.total}
-            color="bg-primary"
-            loading={loading}
-          />
-          <StatCard
-            icon={CheckCircle}
-            label="Active Listings"
-            value={stats?.active}
-            color="bg-green-500"
-            loading={loading}
-          />
-          <StatCard
-            icon={Mail}
-            label="Total Enquiries"
-            value={stats?.enquiries}
-            color="bg-blue-500"
-            loading={loading}
-          />
-          <StatCard
-            icon={AlertCircle}
-            label="New Enquiries"
-            value={stats?.newEnquiries}
-            color="bg-accent"
-            loading={loading}
-          />
+          <StatCard icon={Building2}   label="Total Properties" value={stats?.total}        color="bg-primary"    loading={loading} />
+          <StatCard icon={CheckCircle} label="Active Listings"  value={stats?.active}       color="bg-green-500"  loading={loading} />
+          <StatCard icon={Mail}        label="Total Enquiries"  value={stats?.enquiries}    color="bg-blue-500"   loading={loading} />
+          <StatCard icon={AlertCircle} label="New Enquiries"    value={stats?.newEnquiries} color="bg-accent"     loading={loading} />
         </div>
 
         {/* Quick actions */}
@@ -123,7 +109,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Manage properties shortcut */}
+        {/* Properties shortcut */}
         <div>
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-display font-semibold text-text-main text-lg">Manage Listings</h2>
