@@ -8,18 +8,18 @@ export default {
     extend: {
       colors: {
         primary: {
-          DEFAULT: '#1B4332',
-          light: '#2D6A4F',
+          DEFAULT: '#1A3A6B',
+          light: '#2B5BA8',
         },
         accent: {
-          DEFAULT: '#D4A017',
-          hover: '#B8860B',
+          DEFAULT: '#F97316',
+          hover: '#EA6A0A',
         },
-        bg: '#F9F6F0',
+        bg: '#F8FAFF',
         surface: '#FFFFFF',
-        'text-main': '#1A1A1A',
-        'text-muted': '#6B7280',
-        border: '#E5E0D8',
+        'text-main': '#1A1A2E',
+        'text-muted': '#64748B',
+        border: '#E2E8F0',
       },
       fontFamily: {
         display: ['"Playfair Display"', 'serif'],

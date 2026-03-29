@@ -1,3 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50">
-  <text x="0" y="38" font-family="Playfair Display, serif" font-size="36" fill="#1B4332" font-weight="700">Glomon</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 72">
+  <!-- House icon -->
+  <g transform="translate(4, 4)">
+    <!-- Roof -->
+    <polygon points="32,2 60,26 4,26" fill="#F97316"/>
+    <!-- House body -->
+    <rect x="10" y="26" width="44" height="32" rx="1" fill="#1A3A6B"/>
+    <!-- Window left -->
+    <rect x="14" y="32" width="12" height="10" rx="1" fill="#F97316" opacity="0.9"/>
+    <!-- Window right -->
+    <rect x="38" y="32" width="12" height="10" rx="1" fill="#F97316" opacity="0.9"/>
+    <!-- Door -->
+    <rect x="22" y="42" width="20" height="16" rx="2" fill="white" opacity="0.95"/>
+    <!-- Door knob -->
+    <circle cx="39" cy="50" r="1.8" fill="#1A3A6B"/>
+  </g>
+
+  <!-- Text block -->
+  <g transform="translate(74, 8)">
+    <!-- GLOMON HOMES -->
+    <text
+      x="0" y="28"
+      font-family="'Playfair Display', Georgia, 'Times New Roman', serif"
+      font-size="24"
+      font-weight="700"
+      fill="#1A3A6B"
+      letter-spacing="2.5"
+    >GLOMON HOMES</text>
+
+    <!-- Divider line -->
+    <line x1="1" y1="35" x2="218" y2="35" stroke="#F97316" stroke-width="1.5" opacity="0.7"/>
+
+    <!-- REAL ESTATE -->
+    <text
+      x="1" y="49"
+      font-family="'DM Sans', Arial, Helvetica, sans-serif"
+      font-size="9.5"
+      font-weight="600"
+      fill="#F97316"
+      letter-spacing="5"
+    >REAL ESTATE</text>
+
+    <!-- FIND YOUR PLACE IN UGANDA -->
+    <text
+      x="1" y="63"
+      font-family="'DM Sans', Arial, Helvetica, sans-serif"
+      font-size="8"
+      font-weight="400"
+      fill="#1A3A6B"
+      letter-spacing="2"
+      opacity="0.55"
+    >FIND YOUR PLACE IN UGANDA</text>
+  </g>
 </svg>

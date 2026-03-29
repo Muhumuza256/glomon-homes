@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
-import { Bed, Bath, Maximize2, MapPin } from 'lucide-react'
+import { Bed, Bath, Maximize2, MapPin, MessageCircle } from 'lucide-react'
 import Badge from '../ui/Badge'
-import { formatPrice, getPropertyImage } from '../../utils/formatters'
+import { formatPrice, getPropertyImage, formatPriceWithUSD } from '../../utils/formatters'
+import { useCurrency } from '../../context/CurrencyContext'
+
+const WA_NUMBER = '256700000000'
 
 export default function PropertyCard({ property }) {
   const {
@@ -20,7 +23,10 @@ export default function PropertyCard({ property }) {
     status,
   } = property
 
+  const { usdRate } = useCurrency()
+  const usdLabel = formatPriceWithUSD(price, usdRate)
   const isClosed = status === 'SOLD' || status === 'RENTED'
+  const waText = encodeURIComponent(`Hi, I am interested in ${title}`)
 
   return (
     <Link
@@ -43,6 +49,21 @@ export default function PropertyCard({ property }) {
           </Badge>
           {featured && <Badge variant="featured">Featured</Badge>}
         </div>
+
+        {/* WhatsApp button — bottom-right */}
+        {!isClosed && (
+          <a
+            href={`https://wa.me/${WA_NUMBER}?text=${waText}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-green-500 hover:bg-green-600 text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-full shadow transition-colors"
+            aria-label="WhatsApp enquiry"
+          >
+            <MessageCircle size={13} />
+            WhatsApp
+          </a>
+        )}
 
         {/* Sold / Rented overlay */}
         {isClosed && (
@@ -103,6 +124,9 @@ export default function PropertyCard({ property }) {
             <p className="font-display font-bold text-primary text-[17px] leading-none">
               {formatPrice(price, currency)}
             </p>
+            {usdLabel && (
+              <p className="text-[11px] text-text-muted mt-0.5">{usdLabel}</p>
+            )}
             {priceType === 'RENT' && (
               <p className="text-[11px] text-text-muted mt-0.5">per month</p>
             )}

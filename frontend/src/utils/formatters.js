@@ -24,5 +24,16 @@ export function formatDate(dateString) {
  * Returns a fallback placeholder image URL if no cover image is set.
  */
 export function getPropertyImage(url) {
-  return url || 'https://placehold.co/800x600/1B4332/white?text=Glomon+Homes'
+  return url || 'https://placehold.co/800x600/1A3A6B/white?text=Glomon+Homes'
+}
+
+/**
+ * Format USD equivalent of a UGX amount.
+ * e.g. formatPriceWithUSD(450000000, 3700) → "≈ $121,622"
+ * Returns null if rate is not available.
+ */
+export function formatPriceWithUSD(ugxAmount, rate) {
+  if (!ugxAmount || !rate) return null
+  const usd = Math.round(Number(ugxAmount) / rate)
+  return `≈ $${usd.toLocaleString('en-US')}`
 }

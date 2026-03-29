@@ -5,6 +5,7 @@ const cors = require('cors')
 const propertiesRouter = require('./routes/properties')
 const enquiriesRouter = require('./routes/enquiries')
 const authRouter = require('./routes/auth')
+const currencyRouter = require('./routes/currency')
 const errorHandler = require('./middleware/errorHandler')
 
 const app = express()
@@ -38,6 +39,7 @@ app.use(express.json())
 app.use('/api/properties', propertiesRouter)
 app.use('/api/enquiries', enquiriesRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/currency', currencyRouter)
 
 // Health check
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }))

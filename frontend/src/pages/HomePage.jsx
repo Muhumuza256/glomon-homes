@@ -89,10 +89,19 @@ export default function HomePage() {
       <Navbar />
 
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
-      <section className="relative min-h-screen flex items-center justify-center bg-primary overflow-hidden">
-        {/* Decorative glows */}
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none" />
+      <section className="relative min-h-screen md:min-h-screen min-h-[70vh] flex items-center justify-center overflow-hidden">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80)',
+          }}
+        />
+        {/* Navy overlay */}
+        <div
+          className="absolute inset-0"
+          style={{ backgroundColor: 'rgba(26,58,107,0.65)' }}
+        />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center py-40">
           {/* Pill badge */}
@@ -101,7 +110,7 @@ export default function HomePage() {
             Properties across Uganda
           </div>
 
-          <h1 className="font-display text-5xl md:text-6xl lg:text-[72px] font-bold text-white leading-[1.1] mb-5 tracking-tight">
+          <h1 className="font-display text-5xl md:text-[56px] lg:text-[72px] font-bold text-white leading-[1.1] mb-5 tracking-tight">
             Find Your Place<br />
             <span className="text-accent">in Uganda</span>
           </h1>

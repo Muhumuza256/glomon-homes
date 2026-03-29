@@ -8,6 +8,7 @@ import {
   Home,
   ChevronLeft,
   Phone,
+  MessageCircle,
 } from 'lucide-react'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
@@ -17,7 +18,8 @@ import PropertyGrid from '../components/properties/PropertyGrid'
 import Badge from '../components/ui/Badge'
 import Spinner from '../components/ui/Spinner'
 import { useProperty, useProperties } from '../hooks/useProperties'
-import { formatPrice, formatDate } from '../utils/formatters'
+import { formatPrice, formatDate, formatPriceWithUSD } from '../utils/formatters'
+import { useCurrency } from '../context/CurrencyContext'
 
 const AMENITY_ICONS = {
   Parking: '🚗',
@@ -48,9 +50,12 @@ function StatBox({ icon: Icon, value, label }) {
   )
 }
 
+const WA_NUMBER = '256700000000'
+
 export default function PropertyDetailPage() {
   const { id } = useParams()
   const { data: property, loading, error } = useProperty(id)
+  const { usdRate } = useCurrency()
 
   const { data: related } = useProperties(
     property ? { district: property.district, type: property.propertyType } : {},
@@ -120,7 +125,7 @@ export default function PropertyDetailPage() {
     <div className="min-h-screen bg-bg">
       <Navbar />
 
-      <div className="pt-20">
+      <div className="pt-24">
         {/* Breadcrumb */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
           <nav className="flex items-center gap-2 text-xs text-text-muted">
@@ -173,6 +178,11 @@ export default function PropertyDetailPage() {
                   <p className="font-display font-bold text-primary text-2xl md:text-3xl leading-none">
                     {formatPrice(price, currency)}
                   </p>
+                  {formatPriceWithUSD(price, usdRate) && (
+                    <p className="text-sm text-text-muted mt-0.5">
+                      {formatPriceWithUSD(price, usdRate)}
+                    </p>
+                  )}
                   {priceType === 'RENT' && (
                     <p className="text-sm text-text-muted mt-1">per month</p>
                   )}
@@ -268,12 +278,20 @@ export default function PropertyDetailPage() {
                   <EnquiryForm propertyId={id} propertyTitle={title} />
                 </div>
 
-                {/* Call card */}
-                <div className="bg-primary rounded-card p-5 text-center">
-                  <p className="text-white/70 text-sm mb-3">Prefer a direct call?</p>
+                {/* WhatsApp + Call card */}
+                <div className="bg-primary rounded-card p-5 space-y-3">
+                  <a
+                    href={`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(`Hi, I am interested in ${title}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-btn font-semibold text-sm transition-colors w-full"
+                  >
+                    <MessageCircle size={15} />
+                    WhatsApp Us
+                  </a>
                   <a
                     href="tel:+256700000000"
-                    className="flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white px-4 py-3 rounded-btn font-semibold text-sm transition-colors w-full"
+                    className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-btn font-medium text-sm transition-colors w-full"
                   >
                     <Phone size={15} />
                     +256 700 000 000

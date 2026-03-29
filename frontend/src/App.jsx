@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
+import { CurrencyProvider } from './context/CurrencyContext'
 
 import HomePage from './pages/HomePage'
 import ListingsPage from './pages/ListingsPage'
@@ -19,6 +20,7 @@ import AdminGuard from './admin/AdminGuard'
 export default function App() {
   return (
     <AuthProvider>
+      <CurrencyProvider>
       <BrowserRouter>
         <Routes>
           {/* Public routes */}
@@ -42,6 +44,7 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </BrowserRouter>
+      </CurrencyProvider>
     </AuthProvider>
   )
 }
