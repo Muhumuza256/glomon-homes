@@ -123,116 +123,134 @@ export default function AdminProperties() {
           </div>
         )}
 
-        {/* Table */}
-        <div className="bg-white rounded-card shadow-card overflow-hidden">
-          {loading ? (
-            <div className="flex items-center justify-center py-20">
-              <Spinner size="lg" />
-            </div>
-          ) : properties.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-text-muted text-sm mb-3">No properties yet.</p>
-              <Link to="/admin/properties/new" className="text-sm text-primary font-medium hover:underline">
-                Add your first property →
-              </Link>
-            </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border bg-bg text-left">
-                    <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">Property</th>
-                    <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">Type</th>
-                    <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">Price</th>
-                    <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">District</th>
-                    <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">Status</th>
-                    <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-border">
-                  {properties.map((p) => (
-                    <tr key={p.id} className="hover:bg-bg/60 transition-colors">
-                      {/* Property name + image */}
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-3">
-                          <img
-                            src={getPropertyImage(p.coverImage)}
-                            alt=""
-                            className="w-12 h-9 object-cover rounded-lg shrink-0 bg-gray-100"
-                          />
-                          <div>
-                            <p className="font-medium text-text-main line-clamp-1 max-w-[200px]">{p.title}</p>
-                            {p.featured && (
-                              <span className="text-[10px] font-semibold text-amber-600 uppercase tracking-wide">Featured</span>
-                            )}
-                          </div>
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 text-text-muted">
-                        {p.propertyType.charAt(0) + p.propertyType.slice(1).toLowerCase()}
-                      </td>
-                      <td className="px-4 py-3 font-medium text-primary whitespace-nowrap">
-                        {formatPrice(p.price, p.currency)}
-                        {p.priceType === 'RENT' && <span className="text-text-muted font-normal">/mo</span>}
-                      </td>
-                      <td className="px-4 py-3 text-text-muted">{p.district}</td>
-                      <td className="px-4 py-3">
-                        <Badge variant={STATUS_BADGE[p.status] ?? 'default'}>
-                          {p.status.charAt(0) + p.status.slice(1).toLowerCase()}
-                        </Badge>
-                      </td>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-1 justify-end">
-                          {/* Toggle active/inactive */}
-                          <button
-                            onClick={() => handleToggleStatus(p)}
-                            disabled={actionLoading === p.id || !STATUS_CYCLE[p.status]}
-                            title={
-                              STATUS_CYCLE[p.status]
-                                ? `Set ${STATUS_CYCLE[p.status].toLowerCase()}`
-                                : 'Change status via edit'
-                            }
-                            className={`p-2 rounded-btn transition-colors disabled:opacity-40 ${
-                              p.status === 'ACTIVE'
-                                ? 'text-green-600 hover:bg-green-50'
-                                : 'text-text-muted hover:bg-gray-100'
-                            }`}
-                          >
-                            {actionLoading === p.id ? (
-                              <Spinner size="sm" />
-                            ) : p.status === 'ACTIVE' ? (
-                              <ToggleRight size={18} />
-                            ) : (
-                              <ToggleLeft size={18} />
-                            )}
-                          </button>
-
-                          {/* Edit */}
-                          <Link
-                            to={`/admin/properties/${p.id}/edit`}
-                            className="p-2 rounded-btn text-text-muted hover:text-primary hover:bg-primary/5 transition-colors"
-                            title="Edit"
-                          >
-                            <Pencil size={15} />
-                          </Link>
-
-                          {/* Delete */}
-                          <button
-                            onClick={() => setDeleteTarget(p)}
-                            className="p-2 rounded-btn text-text-muted hover:text-red-600 hover:bg-red-50 transition-colors"
-                            title="Delete"
-                          >
-                            <Trash2 size={15} />
-                          </button>
-                        </div>
-                      </td>
+        {/* Property list */}
+        {loading ? (
+          <div className="flex items-center justify-center py-20">
+            <Spinner size="lg" />
+          </div>
+        ) : properties.length === 0 ? (
+          <div className="bg-white rounded-card shadow-card text-center py-20">
+            <p className="text-text-muted text-sm mb-3">No properties yet.</p>
+            <Link to="/admin/properties/new" className="text-sm text-primary font-medium hover:underline">
+              Add your first property →
+            </Link>
+          </div>
+        ) : (
+          <>
+            {/* ── Desktop table ──────────────────────────────────────────── */}
+            <div className="hidden sm:block bg-white rounded-card shadow-card overflow-hidden">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-border bg-bg text-left">
+                      <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">Property</th>
+                      <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">Type</th>
+                      <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">Price</th>
+                      <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">District</th>
+                      <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide">Status</th>
+                      <th className="px-4 py-3 text-xs font-semibold text-text-muted uppercase tracking-wide text-right">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-border">
+                    {properties.map((p) => (
+                      <tr key={p.id} className="hover:bg-bg/60 transition-colors">
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-3">
+                            <img
+                              src={getPropertyImage(p.coverImage)}
+                              alt=""
+                              className="w-12 h-9 object-cover rounded-lg shrink-0 bg-gray-100"
+                            />
+                            <div>
+                              <p className="font-medium text-text-main line-clamp-1 max-w-[200px]">{p.title}</p>
+                              {p.featured && (
+                                <span className="text-[10px] font-semibold text-amber-600 uppercase tracking-wide">Featured</span>
+                              )}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3 text-text-muted">
+                          {p.propertyType.charAt(0) + p.propertyType.slice(1).toLowerCase()}
+                        </td>
+                        <td className="px-4 py-3 font-medium text-primary whitespace-nowrap">
+                          {formatPrice(p.price, p.currency)}
+                          {p.priceType === 'RENT' && <span className="text-text-muted font-normal">/mo</span>}
+                        </td>
+                        <td className="px-4 py-3 text-text-muted">{p.district}</td>
+                        <td className="px-4 py-3">
+                          <Badge variant={STATUS_BADGE[p.status] ?? 'default'}>
+                            {p.status.charAt(0) + p.status.slice(1).toLowerCase()}
+                          </Badge>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-1 justify-end">
+                            <button
+                              onClick={() => handleToggleStatus(p)}
+                              disabled={actionLoading === p.id || !STATUS_CYCLE[p.status]}
+                              title={STATUS_CYCLE[p.status] ? `Set ${STATUS_CYCLE[p.status].toLowerCase()}` : 'Change status via edit'}
+                              className={`p-2 rounded-btn transition-colors disabled:opacity-40 ${p.status === 'ACTIVE' ? 'text-green-600 hover:bg-green-50' : 'text-text-muted hover:bg-gray-100'}`}
+                            >
+                              {actionLoading === p.id ? <Spinner size="sm" /> : p.status === 'ACTIVE' ? <ToggleRight size={18} /> : <ToggleLeft size={18} />}
+                            </button>
+                            <Link to={`/admin/properties/${p.id}/edit`} className="p-2 rounded-btn text-text-muted hover:text-primary hover:bg-primary/5 transition-colors" title="Edit">
+                              <Pencil size={15} />
+                            </Link>
+                            <button onClick={() => setDeleteTarget(p)} className="p-2 rounded-btn text-text-muted hover:text-red-600 hover:bg-red-50 transition-colors" title="Delete">
+                              <Trash2 size={15} />
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          )}
-        </div>
+
+            {/* ── Mobile cards ───────────────────────────────────────────── */}
+            <div className="sm:hidden space-y-3">
+              {properties.map((p) => (
+                <div key={p.id} className="bg-white rounded-card shadow-card overflow-hidden">
+                  <div className="flex gap-3 p-3">
+                    <img
+                      src={getPropertyImage(p.coverImage)}
+                      alt=""
+                      className="w-20 h-16 object-cover rounded-lg shrink-0 bg-gray-100"
+                    />
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium text-text-main text-sm line-clamp-2 leading-snug">{p.title}</p>
+                      <p className="text-xs text-text-muted mt-0.5">{p.district} · {p.propertyType.charAt(0) + p.propertyType.slice(1).toLowerCase()}</p>
+                      <p className="font-semibold text-primary text-sm mt-1">
+                        {formatPrice(p.price, p.currency)}
+                        {p.priceType === 'RENT' && <span className="text-text-muted font-normal text-xs">/mo</span>}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between px-3 py-2 border-t border-border bg-bg/50">
+                    <Badge variant={STATUS_BADGE[p.status] ?? 'default'}>
+                      {p.status.charAt(0) + p.status.slice(1).toLowerCase()}
+                    </Badge>
+                    <div className="flex items-center gap-1">
+                      <button
+                        onClick={() => handleToggleStatus(p)}
+                        disabled={actionLoading === p.id || !STATUS_CYCLE[p.status]}
+                        className={`p-2 rounded-btn transition-colors disabled:opacity-40 ${p.status === 'ACTIVE' ? 'text-green-600 hover:bg-green-50' : 'text-text-muted hover:bg-gray-100'}`}
+                      >
+                        {actionLoading === p.id ? <Spinner size="sm" /> : p.status === 'ACTIVE' ? <ToggleRight size={18} /> : <ToggleLeft size={18} />}
+                      </button>
+                      <Link to={`/admin/properties/${p.id}/edit`} className="p-2 rounded-btn text-text-muted hover:text-primary hover:bg-primary/5 transition-colors">
+                        <Pencil size={15} />
+                      </Link>
+                      <button onClick={() => setDeleteTarget(p)} className="p-2 rounded-btn text-text-muted hover:text-red-600 hover:bg-red-50 transition-colors">
+                        <Trash2 size={15} />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
 
         {/* Pagination */}
         {!loading && totalPages > 1 && (

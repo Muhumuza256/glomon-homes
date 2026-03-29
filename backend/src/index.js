@@ -6,6 +6,8 @@ const propertiesRouter = require('./routes/properties')
 const enquiriesRouter = require('./routes/enquiries')
 const authRouter = require('./routes/auth')
 const currencyRouter = require('./routes/currency')
+const uploadRouter = require('./routes/upload')
+const settingsRouter = require('./routes/settings')
 const errorHandler = require('./middleware/errorHandler')
 
 const app = express()
@@ -40,6 +42,8 @@ app.use('/api/properties', propertiesRouter)
 app.use('/api/enquiries', enquiriesRouter)
 app.use('/api/auth', authRouter)
 app.use('/api/currency', currencyRouter)
+app.use('/api/upload', uploadRouter)
+app.use('/api/settings', settingsRouter)
 
 // Health check
 app.get('/api/health', (_req, res) => res.json({ status: 'ok' }))

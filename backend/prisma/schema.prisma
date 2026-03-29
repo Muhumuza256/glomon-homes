@@ -53,6 +53,11 @@ model AdminUser {
   createdAt DateTime @default(now())
 }
 
+model SiteSetting {
+  key   String @id
+  value String
+}
+
 enum PropertyType {
   APARTMENT
   HOUSE

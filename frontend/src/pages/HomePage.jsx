@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import api from '../services/api'
 import {
   Search,
   Shield,
@@ -70,11 +71,20 @@ const TESTIMONIALS = [
 
 const SEARCH_TYPES = ['APARTMENT', 'HOUSE', 'VILLA', 'LAND', 'COMMERCIAL', 'OFFICE']
 
+const DEFAULT_HERO = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80'
+
 export default function HomePage() {
   const navigate = useNavigate()
   const [searchLocation, setSearchLocation] = useState('')
   const [searchType, setSearchType] = useState('')
+  const [heroImage, setHeroImage] = useState(DEFAULT_HERO)
   const { data: featured, loading, error } = useFeaturedProperties()
+
+  useEffect(() => {
+    api.get('/api/settings')
+      .then((res) => { if (res.data.hero_image) setHeroImage(res.data.hero_image) })
+      .catch(() => {})
+  }, [])
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -94,7 +104,7 @@ export default function HomePage() {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&q=80)',
+            backgroundImage: `url(${heroImage})`,
           }}
         />
         {/* Navy overlay */}

@@ -15,6 +15,7 @@ import AdminProperties from './admin/AdminProperties'
 import AdminAddProperty from './admin/AdminAddProperty'
 import AdminEditProperty from './admin/AdminEditProperty'
 import AdminEnquiries from './admin/AdminEnquiries'
+import AdminSettings from './admin/AdminSettings'
 import AdminGuard from './admin/AdminGuard'
 
 export default function App() {
@@ -37,6 +38,7 @@ export default function App() {
           <Route path="/admin/properties/new"      element={<AdminGuard><AdminAddProperty /></AdminGuard>} />
           <Route path="/admin/properties/:id/edit" element={<AdminGuard><AdminEditProperty /></AdminGuard>} />
           <Route path="/admin/enquiries"           element={<AdminGuard><AdminEnquiries /></AdminGuard>} />
+          <Route path="/admin/settings"            element={<AdminGuard><AdminSettings /></AdminGuard>} />
 
           {/* Redirect /admin → dashboard */}
           <Route path="/admin" element={<AdminGuard><AdminDashboard /></AdminGuard>} />

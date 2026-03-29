@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AlertCircle, CheckCircle } from 'lucide-react'
 import Spinner from '../components/ui/Spinner'
+import ImageUpload from '../components/ui/ImageUpload'
 import api from '../services/api'
 
 const PROPERTY_TYPES = ['APARTMENT', 'HOUSE', 'VILLA', 'COMMERCIAL', 'LAND', 'OFFICE']
@@ -96,7 +97,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
   }
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-3xl space-y-8">
+    <form onSubmit={handleSubmit} className="max-w-3xl space-y-6">
       {error && (
         <div className="flex items-start gap-2 bg-red-50 border border-red-100 text-red-700 text-sm px-4 py-3 rounded-btn">
           <AlertCircle size={15} className="mt-0.5 shrink-0" />
@@ -105,7 +106,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       )}
 
       {/* ── Basic info ───────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-6 space-y-4">
+      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-4">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Basic Information
         </h3>
@@ -132,7 +133,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
           />
         </Field>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Property Type" required>
             <select
               value={form.propertyType}
@@ -164,12 +165,12 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Pricing ──────────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-6 space-y-4">
+      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-4">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Pricing
         </h3>
-        <div className="grid grid-cols-3 gap-4">
-          <Field label="Price" required>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <Field label="Price (UGX)" required>
             <input
               type="number"
               required
@@ -204,7 +205,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Property details ─────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-6 space-y-4">
+      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-4">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Property Details
         </h3>
@@ -243,11 +244,11 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Location ─────────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-6 space-y-4">
+      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-4">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Location
         </h3>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Field label="Location / Neighbourhood" required>
             <input
               type="text"
@@ -282,7 +283,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Amenities ────────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-6">
+      <section className="bg-white rounded-card shadow-card p-5 sm:p-6">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3 mb-4">
           Amenities
         </h3>
@@ -296,7 +297,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
                 type="checkbox"
                 checked={form.amenities.includes(amenity)}
                 onChange={() => toggleAmenity(amenity)}
-                className="w-4 h-4 rounded accent-[#1B4332]"
+                className="w-4 h-4 rounded accent-primary"
               />
               <span className="text-sm text-text-muted group-hover:text-text-main transition-colors">
                 {amenity}
@@ -307,32 +308,15 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Image & flags ────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-6 space-y-4">
+      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-5">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Image & Visibility
         </h3>
 
-        <Field label="Cover Image URL">
-          <input
-            type="url"
-            value={form.coverImage}
-            onChange={(e) => set('coverImage', e.target.value)}
-            placeholder="https://res.cloudinary.com/…"
-            className={inputCls}
-          />
-          <p className="text-[11px] text-text-muted mt-1">
-            Paste a Cloudinary or direct image URL. Leave blank to use the placeholder.
-          </p>
-        </Field>
-
-        {form.coverImage && (
-          <img
-            src={form.coverImage}
-            alt="Preview"
-            className="w-40 h-28 object-cover rounded-btn border border-border"
-            onError={(e) => { e.target.style.display = 'none' }}
-          />
-        )}
+        <ImageUpload
+          value={form.coverImage}
+          onChange={(url) => set('coverImage', url)}
+        />
 
         <label className="flex items-center gap-3 cursor-pointer select-none">
           <div
@@ -349,19 +333,17 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
           </div>
           <span className="text-sm text-text-main font-medium">
             Featured listing
-            <span className="text-text-muted font-normal ml-1">
-              (shown on homepage)
-            </span>
+            <span className="text-text-muted font-normal ml-1">(shown on homepage)</span>
           </span>
         </label>
       </section>
 
       {/* ── Actions ──────────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pb-8">
         <button
           type="submit"
           disabled={loading}
-          className="flex items-center gap-2 bg-primary hover:bg-primary-light text-white px-6 py-2.5 rounded-btn text-sm font-semibold transition-colors disabled:opacity-60"
+          className="flex items-center justify-center gap-2 bg-primary hover:bg-primary-light text-white px-6 py-3 rounded-btn text-sm font-semibold transition-colors disabled:opacity-60"
         >
           {loading && <Spinner size="sm" className="border-white/30 border-t-white" />}
           {loading ? 'Saving…' : isEdit ? 'Save Changes' : 'Create Property'}
@@ -369,7 +351,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
         <button
           type="button"
           onClick={() => navigate('/admin/properties')}
-          className="px-6 py-2.5 rounded-btn text-sm font-medium border border-border text-text-muted hover:text-text-main hover:border-gray-400 transition-colors"
+          className="px-6 py-3 rounded-btn text-sm font-medium border border-border text-text-muted hover:text-text-main hover:border-gray-400 transition-colors"
         >
           Cancel
         </button>
