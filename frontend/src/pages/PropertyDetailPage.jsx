@@ -1,0 +1,310 @@
+import { useParams, Link } from 'react-router-dom'
+import {
+  MapPin,
+  Bed,
+  Bath,
+  Maximize2,
+  Calendar,
+  Home,
+  ChevronLeft,
+  Phone,
+} from 'lucide-react'
+import Navbar from '../components/layout/Navbar'
+import Footer from '../components/layout/Footer'
+import PropertyImageGallery from '../components/properties/PropertyImageGallery'
+import EnquiryForm from '../components/forms/EnquiryForm'
+import PropertyGrid from '../components/properties/PropertyGrid'
+import Badge from '../components/ui/Badge'
+import Spinner from '../components/ui/Spinner'
+import { useProperty, useProperties } from '../hooks/useProperties'
+import { formatPrice, formatDate } from '../utils/formatters'
+
+const AMENITY_ICONS = {
+  Parking: '🚗',
+  Security: '🔒',
+  'Swimming Pool': '🏊',
+  Generator: '⚡',
+  'Water Tank': '💧',
+  Garden: '🌿',
+  'WiFi Ready': '📶',
+  'Lake View': '🌊',
+  Gym: '🏋️',
+  Lift: '🛗',
+  CCTV: '📷',
+  Borehole: '💦',
+}
+
+function StatBox({ icon: Icon, value, label }) {
+  return (
+    <div className="flex items-center gap-3">
+      <div className="w-10 h-10 bg-primary/5 rounded-xl flex items-center justify-center shrink-0">
+        <Icon size={18} className="text-primary" />
+      </div>
+      <div>
+        <p className="font-semibold text-text-main text-lg leading-none">{value}</p>
+        <p className="text-xs text-text-muted mt-0.5">{label}</p>
+      </div>
+    </div>
+  )
+}
+
+export default function PropertyDetailPage() {
+  const { id } = useParams()
+  const { data: property, loading, error } = useProperty(id)
+
+  const { data: related } = useProperties(
+    property ? { district: property.district, type: property.propertyType } : {},
+    1
+  )
+  const relatedProperties = (related ?? []).filter((p) => p.id !== id).slice(0, 3)
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-bg flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center">
+          <Spinner size="lg" />
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+
+  if (error || !property) {
+    return (
+      <div className="min-h-screen bg-bg flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex flex-col items-center justify-center text-center px-4 py-20">
+          <div className="text-6xl mb-5">🏚️</div>
+          <h2 className="font-display text-2xl font-bold text-text-main mb-2">
+            Property Not Found
+          </h2>
+          <p className="text-text-muted text-sm mb-7 max-w-xs">
+            {error ?? 'This property may have been removed or is no longer available.'}
+          </p>
+          <Link
+            to="/listings"
+            className="flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+          >
+            <ChevronLeft size={15} />
+            Back to Listings
+          </Link>
+        </div>
+        <Footer />
+      </div>
+    )
+  }
+
+  const {
+    title,
+    description,
+    price,
+    priceType,
+    currency,
+    location,
+    district,
+    address,
+    bedrooms,
+    bathrooms,
+    area,
+    propertyType,
+    status,
+    featured,
+    amenities,
+    images,
+    coverImage,
+    createdAt,
+  } = property
+
+  return (
+    <div className="min-h-screen bg-bg">
+      <Navbar />
+
+      <div className="pt-20">
+        {/* Breadcrumb */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+          <nav className="flex items-center gap-2 text-xs text-text-muted">
+            <Link to="/" className="hover:text-primary transition-colors">
+              Home
+            </Link>
+            <span>/</span>
+            <Link to="/listings" className="hover:text-primary transition-colors">
+              Listings
+            </Link>
+            <span>/</span>
+            <span className="text-text-main truncate max-w-[200px]">{title}</span>
+          </nav>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-20">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* ── Left column ──────────────────────────────────────────── */}
+            <div className="flex-1 min-w-0">
+              {/* Gallery */}
+              <PropertyImageGallery images={images} coverImage={coverImage} title={title} />
+
+              {/* Header */}
+              <div className="mt-6 flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+                <div className="flex-1">
+                  <div className="flex flex-wrap gap-2 mb-2.5">
+                    <Badge variant={priceType === 'SALE' ? 'sale' : 'rent'}>
+                      For {priceType === 'SALE' ? 'Sale' : 'Rent'}
+                    </Badge>
+                    {featured && <Badge variant="featured">Featured</Badge>}
+                    {status === 'SOLD' && <Badge variant="sold">Sold</Badge>}
+                    {status === 'RENTED' && <Badge variant="rented">Rented</Badge>}
+                    <Badge variant="default">
+                      {propertyType.charAt(0) + propertyType.slice(1).toLowerCase()}
+                    </Badge>
+                  </div>
+
+                  <h1 className="font-display text-2xl md:text-3xl font-bold text-text-main leading-tight mb-2.5">
+                    {title}
+                  </h1>
+
+                  <div className="flex items-center gap-1.5 text-text-muted text-sm">
+                    <MapPin size={13} className="text-accent shrink-0" />
+                    <span>{[location, district, address].filter(Boolean).join(' · ')}</span>
+                  </div>
+                </div>
+
+                {/* Price */}
+                <div className="sm:text-right shrink-0">
+                  <p className="font-display font-bold text-primary text-2xl md:text-3xl leading-none">
+                    {formatPrice(price, currency)}
+                  </p>
+                  {priceType === 'RENT' && (
+                    <p className="text-sm text-text-muted mt-1">per month</p>
+                  )}
+                  <p className="text-xs text-text-muted mt-1.5 flex items-center gap-1 sm:justify-end">
+                    <Calendar size={11} />
+                    Listed {formatDate(createdAt)}
+                  </p>
+                </div>
+              </div>
+
+              {/* Key stats */}
+              {(bedrooms || bathrooms || area) && (
+                <div className="flex flex-wrap gap-6 bg-surface rounded-card shadow-card p-5 mt-6">
+                  {bedrooms && (
+                    <StatBox
+                      icon={Bed}
+                      value={bedrooms}
+                      label={bedrooms === 1 ? 'Bedroom' : 'Bedrooms'}
+                    />
+                  )}
+                  {bathrooms && (
+                    <StatBox
+                      icon={Bath}
+                      value={bathrooms}
+                      label={bathrooms === 1 ? 'Bathroom' : 'Bathrooms'}
+                    />
+                  )}
+                  {area && <StatBox icon={Maximize2} value={`${area} m²`} label="Floor Area" />}
+                  <StatBox
+                    icon={Home}
+                    value={propertyType.charAt(0) + propertyType.slice(1).toLowerCase()}
+                    label="Property Type"
+                  />
+                </div>
+              )}
+
+              {/* Description */}
+              <div className="mt-8">
+                <h2 className="font-display font-semibold text-text-main text-xl mb-3">
+                  About This Property
+                </h2>
+                <p className="text-text-muted text-sm leading-relaxed whitespace-pre-wrap">
+                  {description}
+                </p>
+              </div>
+
+              {/* Amenities */}
+              {amenities?.length > 0 && (
+                <div className="mt-8">
+                  <h2 className="font-display font-semibold text-text-main text-xl mb-4">
+                    Amenities & Features
+                  </h2>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                    {amenities.map((amenity) => (
+                      <div
+                        key={amenity}
+                        className="flex items-center gap-3 bg-surface border border-border rounded-btn px-4 py-3 text-sm"
+                      >
+                        <span className="text-base leading-none">
+                          {AMENITY_ICONS[amenity] ?? '✓'}
+                        </span>
+                        <span className="font-medium text-text-main">{amenity}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Location */}
+              <div className="mt-8">
+                <h2 className="font-display font-semibold text-text-main text-xl mb-3">
+                  Location
+                </h2>
+                <div className="flex items-start gap-3 bg-surface border border-border rounded-card p-4">
+                  <MapPin size={17} className="text-accent mt-0.5 shrink-0" />
+                  <div className="text-sm">
+                    <p className="font-semibold text-text-main">{district}</p>
+                    {location && <p className="text-text-muted mt-0.5">{location}</p>}
+                    {address && <p className="text-text-muted mt-0.5">{address}</p>}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* ── Right sidebar ─────────────────────────────────────────── */}
+            <aside className="w-full lg:w-80 shrink-0">
+              <div className="sticky top-24 space-y-4">
+                {/* Enquiry card */}
+                <div className="bg-surface rounded-card shadow-card p-5">
+                  <h3 className="font-display font-semibold text-text-main text-lg mb-4">
+                    Enquire About This Property
+                  </h3>
+                  <EnquiryForm propertyId={id} propertyTitle={title} />
+                </div>
+
+                {/* Call card */}
+                <div className="bg-primary rounded-card p-5 text-center">
+                  <p className="text-white/70 text-sm mb-3">Prefer a direct call?</p>
+                  <a
+                    href="tel:+256700000000"
+                    className="flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white px-4 py-3 rounded-btn font-semibold text-sm transition-colors w-full"
+                  >
+                    <Phone size={15} />
+                    +256 700 000 000
+                  </a>
+                </div>
+
+                {/* Back link */}
+                <Link
+                  to="/listings"
+                  className="flex items-center gap-1.5 text-sm text-text-muted hover:text-primary transition-colors"
+                >
+                  <ChevronLeft size={15} />
+                  Back to all listings
+                </Link>
+              </div>
+            </aside>
+          </div>
+
+          {/* ── Related properties ──────────────────────────────────────── */}
+          {relatedProperties.length > 0 && (
+            <div className="mt-16">
+              <h2 className="font-display text-2xl font-bold text-text-main mb-6">
+                More Properties in {district}
+              </h2>
+              <PropertyGrid properties={relatedProperties} loading={false} />
+            </div>
+          )}
+        </div>
+      </div>
+
+      <Footer />
+    </div>
+  )
+}

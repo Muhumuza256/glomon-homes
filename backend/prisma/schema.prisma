@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Property {
+  id           String        @id @default(cuid())
+  title        String
+  description  String
+  price        Float
+  priceType    PriceType     @default(SALE)
+  currency     String        @default("UGX")
+  propertyType PropertyType
+  status       ListingStatus @default(ACTIVE)
+  bedrooms     Int?
+  bathrooms    Int?
+  area         Float? // square meters
+  location     String // e.g. "Kololo, Kampala"
+  district     String // e.g. "Kampala"
+  address      String?
+  latitude     Float?
+  longitude    Float?
+  images       String[] // Cloudinary URLs
+  coverImage   String? // Main display image URL
+  featured     Boolean       @default(false)
+  amenities    String[] // e.g. ["Parking", "Security", "Swimming Pool"]
+  enquiries    Enquiry[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Enquiry {
+  id         String        @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  message    String
+  propertyId String?
+  property   Property?     @relation(fields: [propertyId], references: [id])
+  status     EnquiryStatus @default(NEW)
+  createdAt  DateTime      @default(now())
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String // bcrypt hashed
+  createdAt DateTime @default(now())
+}
+
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  VILLA
+  COMMERCIAL
+  LAND
+  OFFICE
+}
+
+enum PriceType {
+  SALE
+  RENT
+}
+
+enum ListingStatus {
+  ACTIVE
+  INACTIVE
+  SOLD
+  RENTED
+}
+
+enum EnquiryStatus {
+  NEW
+  READ
+  REPLIED
+}
