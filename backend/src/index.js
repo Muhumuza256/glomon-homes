@@ -34,6 +34,6 @@ app.get('/api/health', (_req, res) => res.json({ status: 'ok' }))
 // Global error handler
 app.use(errorHandler)
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`Glomon Homes API running on port ${PORT}`)
 })
