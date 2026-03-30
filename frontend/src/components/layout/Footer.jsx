@@ -115,11 +115,10 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
           <p className="text-white/40 text-xs">
             © 2025 Glomon Homes. All rights reserved.
           </p>
-          <p className="text-white/40 text-xs">Made with care in Uganda 🇺🇬</p>
         </div>
       </div>
     </footer>

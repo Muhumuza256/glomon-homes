@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import {
   MapPin,
@@ -14,6 +15,7 @@ import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import PropertyImageGallery from '../components/properties/PropertyImageGallery'
 import EnquiryForm from '../components/forms/EnquiryForm'
+import VisitBookingModal from '../components/forms/VisitBookingModal'
 import PropertyGrid from '../components/properties/PropertyGrid'
 import Badge from '../components/ui/Badge'
 import Spinner from '../components/ui/Spinner'
@@ -56,6 +58,7 @@ export default function PropertyDetailPage() {
   const { id } = useParams()
   const { data: property, loading, error } = useProperty(id)
   const { usdRate } = useCurrency()
+  const [visitOpen, setVisitOpen] = useState(false)
 
   const { data: related } = useProperties(
     property ? { district: property.district, type: property.propertyType } : {},
@@ -278,6 +281,15 @@ export default function PropertyDetailPage() {
                   <EnquiryForm propertyId={id} propertyTitle={title} />
                 </div>
 
+                {/* Book a Visit */}
+                <button
+                  onClick={() => setVisitOpen(true)}
+                  className="w-full flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white px-4 py-3 rounded-card font-semibold text-sm transition-colors shadow-card"
+                >
+                  <Calendar size={15} />
+                  Book a Visit
+                </button>
+
                 {/* WhatsApp + Call card */}
                 <div className="bg-primary rounded-card p-5 space-y-3">
                   <a
@@ -323,6 +335,14 @@ export default function PropertyDetailPage() {
       </div>
 
       <Footer />
+
+      {visitOpen && (
+        <VisitBookingModal
+          propertyId={id}
+          propertyTitle={property?.title}
+          onClose={() => setVisitOpen(false)}
+        />
+      )}
     </div>
   )
 }

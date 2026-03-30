@@ -2,39 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Light mode (default) ─────────────────────────────────────────────────── */
 :root {
-  --color-primary: #1A3A6B;
-  --color-primary-light: #2B5BA8;
-  --color-accent: #F97316;
-  --color-accent-hover: #EA6A0A;
-  --color-bg: #F8FAFF;
-  --color-surface: #FFFFFF;
-  --color-text: #1A1A2E;
-  --color-text-muted: #64748B;
-  --color-border: #E2E8F0;
+  --color-primary:       26 58 107;   /* #1A3A6B */
+  --color-primary-light: 43 91 168;   /* #2B5BA8 */
+  --color-accent:        249 115 22;  /* #F97316 */
+  --color-accent-hover:  234 106 10;  /* #EA6A0A */
+  --color-bg:            248 250 255; /* #F8FAFF */
+  --color-surface:       255 255 255; /* #FFFFFF */
+  --color-text:          26 26 46;    /* #1A1A2E */
+  --color-text-muted:    100 116 139; /* #64748B */
+  --color-border:        226 232 240; /* #E2E8F0 */
+}
+
+/* ── Dark mode ───────────────────────────────────────────────────────────── */
+.dark {
+  --color-primary:       96 165 250;  /* blue-400 — pops on dark bg */
+  --color-primary-light: 147 197 253; /* blue-300 */
+  --color-accent:        249 115 22;  /* same orange */
+  --color-accent-hover:  234 106 10;
+  --color-bg:            15 23 42;    /* slate-900 */
+  --color-surface:       30 41 59;    /* slate-800 */
+  --color-text:          241 245 249; /* slate-100 */
+  --color-text-muted:    148 163 184; /* slate-400 */
+  --color-border:        51 65 85;    /* slate-700 */
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: rgb(var(--color-bg));
+  color: rgb(var(--color-text));
   font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Thin scrollbar for thumbnail strips */
-.scrollbar-thin::-webkit-scrollbar {
-  height: 4px;
+/* ── Dark mode: form elements auto-inherit surface colors ─────────────────── */
+.dark input,
+.dark select,
+.dark textarea {
+  background-color: rgb(var(--color-surface));
+  color: rgb(var(--color-text));
+  border-color: rgb(var(--color-border));
 }
-.scrollbar-thin::-webkit-scrollbar-track {
-  background: transparent;
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: rgb(var(--color-text-muted));
 }
+
+/* ── Thin scrollbar for thumbnail strips ─────────────────────────────────── */
+.scrollbar-thin::-webkit-scrollbar { height: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background: #E5E0D8;
+  background: rgb(var(--color-border));
   border-radius: 2px;
 }
 
-/* Line clamp utility */
+/* ── Line clamp utilities ─────────────────────────────────────────────────── */
 .line-clamp-1 {
   overflow: hidden;
   display: -webkit-box;

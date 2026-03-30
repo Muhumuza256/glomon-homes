@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, X, Phone, MessageCircle, Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
+import { Menu, X, Phone, MessageCircle, Facebook, Instagram, Twitter, Youtube, Sun, Moon } from 'lucide-react'
+import { useTheme } from '../../context/ThemeContext'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
+  const { dark, toggle } = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -33,17 +35,13 @@ export default function Navbar() {
       <div className="bg-[#1A3A6B] text-white/90 text-[12px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between gap-4">
           <div className="flex items-center gap-4">
-            <a
-              href="tel:+256700000000"
-              className="flex items-center gap-1.5 hover:text-[#F97316] transition-colors"
-            >
+            <a href="tel:+256700000000" className="flex items-center gap-1.5 hover:text-[#F97316] transition-colors">
               <Phone size={12} />
               +256 700 000 000
             </a>
             <a
               href={`https://wa.me/${WA_NUMBER}`}
-              target="_blank"
-              rel="noopener noreferrer"
+              target="_blank" rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-1.5 hover:text-[#F97316] transition-colors"
             >
               <MessageCircle size={12} />
@@ -51,32 +49,24 @@ export default function Navbar() {
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#F97316] transition-colors" aria-label="Facebook">
-              <Facebook size={13} />
-            </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#F97316] transition-colors" aria-label="Instagram">
-              <Instagram size={13} />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#F97316] transition-colors" aria-label="Twitter">
-              <Twitter size={13} />
-            </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#F97316] transition-colors" aria-label="YouTube">
-              <Youtube size={13} />
-            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#F97316] transition-colors" aria-label="Facebook"><Facebook size={13} /></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#F97316] transition-colors" aria-label="Instagram"><Instagram size={13} /></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#F97316] transition-colors" aria-label="Twitter"><Twitter size={13} /></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#F97316] transition-colors" aria-label="YouTube"><Youtube size={13} /></a>
           </div>
         </div>
       </div>
 
       {/* ── Main nav bar ───────────────────────────────────────────────────── */}
-      <div
-        className={`transition-all duration-300 ${
-          transparent ? 'bg-transparent' : 'bg-white shadow-card border-b border-border'
-        }`}
-      >
+      <div className={`transition-all duration-300 ${
+        transparent
+          ? 'bg-transparent'
+          : 'bg-surface shadow-card border-b border-border'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Wordmark */}
-            <Link to="/" className="flex flex-col leading-none group">
+            <Link to="/" className="flex flex-col leading-none">
               <span className={`font-display font-bold text-[19px] tracking-[0.04em] transition-colors ${
                 transparent ? 'text-white' : 'text-primary'
               }`}>
@@ -99,12 +89,8 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     `px-4 py-2 rounded-btn text-sm font-medium transition-colors ${
                       isActive
-                        ? transparent
-                          ? 'text-white bg-white/15'
-                          : 'text-primary bg-primary/5'
-                        : transparent
-                        ? 'text-white/80 hover:text-white hover:bg-white/10'
-                        : 'text-text-main hover:text-primary hover:bg-primary/5'
+                        ? transparent ? 'text-white bg-white/15' : 'text-primary bg-primary/5'
+                        : transparent ? 'text-white/80 hover:text-white hover:bg-white/10' : 'text-text-main hover:text-primary hover:bg-primary/5'
                     }`
                   }
                 >
@@ -119,23 +105,39 @@ export default function Navbar() {
               </Link>
             </div>
 
-            {/* Mobile toggle */}
-            <button
-              className={`md:hidden p-2 rounded-btn transition-colors ${
-                transparent ? 'text-white hover:bg-white/10' : 'text-primary hover:bg-primary/5'
-              }`}
-              onClick={() => setOpen((v) => !v)}
-              aria-label="Toggle menu"
-            >
-              {open ? <X size={22} /> : <Menu size={22} />}
-            </button>
+            {/* Right: dark toggle + mobile menu */}
+            <div className="flex items-center gap-1">
+              {/* Dark mode toggle */}
+              <button
+                onClick={toggle}
+                aria-label="Toggle dark mode"
+                className={`p-2 rounded-btn transition-colors ${
+                  transparent
+                    ? 'text-white/70 hover:text-white hover:bg-white/10'
+                    : 'text-text-muted hover:text-text-main hover:bg-border/40'
+                }`}
+              >
+                {dark ? <Sun size={17} /> : <Moon size={17} />}
+              </button>
+
+              {/* Mobile hamburger */}
+              <button
+                className={`md:hidden p-2 rounded-btn transition-colors ${
+                  transparent ? 'text-white hover:bg-white/10' : 'text-primary hover:bg-primary/5'
+                }`}
+                onClick={() => setOpen((v) => !v)}
+                aria-label="Toggle menu"
+              >
+                {open ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-white border-t border-border shadow-lg">
+        <div className="md:hidden bg-surface border-t border-border shadow-lg">
           <div className="px-4 py-3 space-y-1">
             {NAV_LINKS.map(({ to, label }) => (
               <NavLink
@@ -144,7 +146,7 @@ export default function Navbar() {
                 end={to === '/'}
                 className={({ isActive }) =>
                   `block px-4 py-2.5 rounded-btn text-sm font-medium transition-colors ${
-                    isActive ? 'bg-primary/5 text-primary' : 'text-text-main hover:bg-gray-50'
+                    isActive ? 'bg-primary/5 text-primary' : 'text-text-main hover:bg-border/30'
                   }`
                 }
               >

@@ -30,6 +30,7 @@ model Property {
   featured     Boolean       @default(false)
   amenities    String[] // e.g. ["Parking", "Security", "Swimming Pool"]
   enquiries    Enquiry[]
+  visits       VisitBooking[]
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }
@@ -56,6 +57,26 @@ model AdminUser {
 model SiteSetting {
   key   String @id
   value String
+}
+
+model VisitBooking {
+  id         String      @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  propertyId String?
+  property   Property?   @relation(fields: [propertyId], references: [id])
+  visitDate  DateTime
+  timeSlot   String
+  notes      String?
+  status     VisitStatus @default(PENDING)
+  createdAt  DateTime    @default(now())
+}
+
+enum VisitStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
 }
 
 enum PropertyType {

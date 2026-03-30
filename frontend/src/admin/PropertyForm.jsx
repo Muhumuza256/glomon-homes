@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AlertCircle, CheckCircle } from 'lucide-react'
 import Spinner from '../components/ui/Spinner'
-import ImageUpload from '../components/ui/ImageUpload'
+import MultiImageUpload from '../components/ui/MultiImageUpload'
 import api from '../services/api'
 
 const PROPERTY_TYPES = ['APARTMENT', 'HOUSE', 'VILLA', 'COMMERCIAL', 'LAND', 'OFFICE']
@@ -19,7 +19,7 @@ const EMPTY = {
   bedrooms: '', bathrooms: '', area: '',
   location: '', district: 'Kampala', address: '',
   featured: false, status: 'ACTIVE',
-  amenities: [], coverImage: '',
+  amenities: [], images: [], coverImage: '',
 }
 
 const inputCls =
@@ -59,14 +59,15 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
     setError('')
     setLoading(true)
     try {
+      const imgs = form.images.length ? form.images : (form.coverImage ? [form.coverImage] : [])
       const payload = {
         ...form,
         price: parseFloat(form.price) || 0,
         bedrooms: form.bedrooms ? parseInt(form.bedrooms) : null,
         bathrooms: form.bathrooms ? parseInt(form.bathrooms) : null,
         area: form.area ? parseFloat(form.area) : null,
-        images: form.coverImage ? [form.coverImage] : [],
-        coverImage: form.coverImage || null,
+        images: imgs,
+        coverImage: imgs[0] || null,
       }
 
       if (isEdit) {
@@ -313,9 +314,12 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
           Image & Visibility
         </h3>
 
-        <ImageUpload
-          value={form.coverImage}
-          onChange={(url) => set('coverImage', url)}
+        <MultiImageUpload
+          images={form.images.length ? form.images : (form.coverImage ? [form.coverImage] : [])}
+          onChange={(urls) => {
+            set('images', urls)
+            set('coverImage', urls[0] ?? '')
+          }}
         />
 
         <label className="flex items-center gap-3 cursor-pointer select-none">
