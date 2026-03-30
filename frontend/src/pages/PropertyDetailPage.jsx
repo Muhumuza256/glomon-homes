@@ -52,7 +52,7 @@ function StatBox({ icon: Icon, value, label }) {
   )
 }
 
-const WA_NUMBER = '256700000000'
+const WA_NUMBER = '256781106837' // Glomon Homes WhatsApp number (updated from placeholder)
 
 export default function PropertyDetailPage() {
   const { id } = useParams()

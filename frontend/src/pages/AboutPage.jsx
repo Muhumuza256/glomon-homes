@@ -39,7 +39,7 @@ const HOURS = [
   { day: 'Sunday', time: 'Closed' },
 ]
 
-const WA_NUMBER = '256700000000'
+const WA_NUMBER = '256781106837' // Glomon Homes WhatsApp number (updated from placeholder)
 
 export default function AboutPage() {
   return (
