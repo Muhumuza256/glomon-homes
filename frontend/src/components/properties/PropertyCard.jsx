@@ -32,7 +32,7 @@ export default function PropertyCard({ property }) {
   return (
     <Link
       to={`/listings/${id}`}
-      className="group block bg-surface rounded-[4px] overflow-hidden border border-border hover:border-[#1A1A1A]/30 dark:hover:border-white/30 shadow-card hover:shadow-card-hover transition-all duration-300"
+      className="group block bg-surface rounded-[4px] overflow-hidden border border-border hover:border-[#1A1A1A]/30 shadow-card hover:shadow-card-hover transition-all duration-300"
     >
       {/* Image */}
       <div className="relative h-52 overflow-hidden bg-[#F0F0EE]">
@@ -80,7 +80,6 @@ export default function PropertyCard({ property }) {
 
       {/* Body */}
       <div className="p-4 pt-3.5">
-        {/* Type label */}
         <p className="text-[10px] font-bold text-text-muted uppercase tracking-[0.18em] mb-1.5">
           {propertyType.charAt(0) + propertyType.slice(1).toLowerCase()}
           {district ? ` · ${district}` : ''}
@@ -122,7 +121,7 @@ export default function PropertyCard({ property }) {
         {/* Price row */}
         <div className="flex items-end justify-between">
           <div>
-            <p className="font-display font-bold text-[#1A1A1A] dark:text-white text-[18px] leading-none">
+            <p className="font-display font-bold text-[#1A1A1A] text-[18px] leading-none">
               {formatPrice(price, currency)}
             </p>
             {usdLabel && (

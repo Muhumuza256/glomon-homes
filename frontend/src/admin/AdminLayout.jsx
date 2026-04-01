@@ -119,7 +119,7 @@ export default function AdminLayout({ children, title }) {
 
       {/* ── Main content ──────────────────────────────────────────────────── */}
       <div className="md:ml-56 flex-1 flex flex-col min-h-screen w-full">
-        <header className="bg-surface dark:bg-[#1e1e1e] border-b border-border px-4 sm:px-8 py-4 sticky top-0 z-30 flex items-center gap-3">
+        <header className="bg-surface border-b border-border px-4 sm:px-8 py-4 sticky top-0 z-30 flex items-center gap-3">
           {/* Hamburger — mobile only */}
           <button
             className="md:hidden p-1.5 rounded-btn text-text-muted hover:text-text-main hover:bg-border/40 transition-colors shrink-0"

@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Light mode (default) — Compass-inspired palette ─────────────────────── */
+/* ── Color palette ────────────────────────────────────────────────────────── */
 :root {
   --color-primary:       26 26 26;    /* #1A1A1A  charcoal-black   */
   --color-primary-light: 64 64 64;    /* #404040  dark gray        */
@@ -15,39 +15,12 @@
   --color-border:        229 229 229; /* #E5E5E5  very light gray  */
 }
 
-/* ── Dark mode ───────────────────────────────────────────────────────────── */
-.dark {
-  --color-primary:       229 229 229; /* near-white on dark bg */
-  --color-primary-light: 200 200 200;
-  --color-accent:        220 80 0;    /* keep orange */
-  --color-accent-hover:  190 64 0;
-  --color-bg:            15 15 15;    /* true dark */
-  --color-surface:       26 26 26;    /* charcoal surface */
-  --color-text:          241 241 241;
-  --color-text-muted:    161 161 161;
-  --color-border:        55 55 55;
-}
-
 body {
   background-color: rgb(var(--color-bg));
   color: rgb(var(--color-text));
   font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* ── Dark mode: form elements auto-inherit surface colors ─────────────────── */
-.dark input,
-.dark select,
-.dark textarea {
-  background-color: rgb(var(--color-surface));
-  color: rgb(var(--color-text));
-  border-color: rgb(var(--color-border));
-}
-
-.dark input::placeholder,
-.dark textarea::placeholder {
-  color: rgb(var(--color-text-muted));
 }
 
 /* ── Thin scrollbar for thumbnail strips ─────────────────────────────────── */

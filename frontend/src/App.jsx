@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './context/AuthContext'
 import { CurrencyProvider } from './context/CurrencyContext'
-import { ThemeProvider } from './context/ThemeContext'
 import FloatingWhatsApp from './components/ui/FloatingWhatsApp'
 
 import HomePage from './pages/HomePage'
@@ -23,12 +22,11 @@ import AdminGuard from './admin/AdminGuard'
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <CurrencyProvider>
-          <BrowserRouter>
-            <FloatingWhatsApp />
-            <Routes>
+    <AuthProvider>
+      <CurrencyProvider>
+        <BrowserRouter>
+          <FloatingWhatsApp />
+          <Routes>
               {/* Public routes */}
               <Route path="/" element={<HomePage />} />
               <Route path="/listings" element={<ListingsPage />} />
@@ -50,10 +48,9 @@ export default function App() {
               <Route path="/admin" element={<AdminGuard><AdminDashboard /></AdminGuard>} />
 
               <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </BrowserRouter>
-        </CurrencyProvider>
-      </AuthProvider>
-    </ThemeProvider>
+          </Routes>
+        </BrowserRouter>
+      </CurrencyProvider>
+    </AuthProvider>
   )
 }

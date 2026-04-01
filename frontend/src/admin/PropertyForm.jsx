@@ -23,7 +23,7 @@ const EMPTY = {
 }
 
 const inputCls =
-  'w-full border border-border rounded-btn px-3 py-2.5 text-sm text-text-main focus:outline-none focus:border-[#1A1A1A] dark:focus:border-white/50 transition-colors bg-surface'
+  'w-full border border-border rounded-btn px-3 py-2.5 text-sm text-text-main focus:outline-none focus:border-[#1A1A1A] transition-colors bg-surface'
 const labelCls = 'block text-xs font-medium text-text-main mb-1.5'
 
 function Field({ label, required, children }) {

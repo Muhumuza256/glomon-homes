@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, X, Phone, MessageCircle, Facebook, Instagram, Twitter, Youtube, Sun, Moon } from 'lucide-react'
-import { useTheme } from '../../context/ThemeContext'
+import { Menu, X, Phone, MessageCircle, Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -17,7 +16,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
   const isHome = location.pathname === '/'
-  const { dark, toggle } = useTheme()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32)
@@ -32,7 +30,7 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
       {/* ── Slim top bar ───────────────────────────────────────────────────── */}
-      <div className="bg-[#1A1A1A] dark:bg-black text-white/80 text-[12.5px]">
+      <div className="bg-[#1A1A1A] text-white/80 text-[12.5px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
             <a href="tel:+256700000000" className="flex items-center gap-2 hover:text-white transition-colors font-medium">
@@ -61,14 +59,14 @@ export default function Navbar() {
       <div className={`transition-all duration-300 ${
         transparent
           ? 'bg-black/20 backdrop-blur-sm'
-          : 'bg-surface dark:bg-[#1a1a1a] shadow-sm border-b border-border/60'
+          : 'bg-surface shadow-sm border-b border-border/60'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-[60px]">
             {/* Wordmark */}
-            <Link to="/" className="flex flex-col leading-none group">
+            <Link to="/" className="flex flex-col leading-none">
               <span className={`font-display font-bold text-[18px] tracking-[0.05em] transition-colors ${
-                transparent ? 'text-white' : 'text-[#1A1A1A] dark:text-white'
+                transparent ? 'text-white' : 'text-[#1A1A1A]'
               }`}>
                 GLOMON<span className="text-accent"> HOMES</span>
               </span>
@@ -91,10 +89,10 @@ export default function Navbar() {
                       isActive
                         ? transparent
                           ? 'text-white font-semibold'
-                          : 'text-[#1A1A1A] dark:text-white font-semibold'
+                          : 'text-[#1A1A1A] font-semibold'
                         : transparent
                           ? 'text-white/75 hover:text-white'
-                          : 'text-text-muted hover:text-[#1A1A1A] dark:hover:text-white'
+                          : 'text-text-muted hover:text-[#1A1A1A]'
                     }`
                   }
                 >
@@ -103,43 +101,29 @@ export default function Navbar() {
               ))}
               <Link
                 to="/listings"
-                className="ml-4 px-5 py-2 text-[13px] font-semibold bg-[#1A1A1A] dark:bg-white hover:bg-accent text-white dark:text-[#1A1A1A] dark:hover:text-white rounded-btn transition-colors tracking-wide"
+                className="ml-4 px-5 py-2 text-[13px] font-semibold bg-[#1A1A1A] hover:bg-accent text-white rounded-btn transition-colors tracking-wide"
               >
                 Browse Properties
               </Link>
             </div>
 
-            {/* Right: dark toggle + mobile menu */}
-            <div className="flex items-center gap-1">
-              <button
-                onClick={toggle}
-                aria-label="Toggle dark mode"
-                className={`p-2 rounded-btn transition-colors ${
-                  transparent
-                    ? 'text-white/70 hover:text-white'
-                    : 'text-text-muted hover:text-text-main hover:bg-border/40'
-                }`}
-              >
-                {dark ? <Sun size={16} /> : <Moon size={16} />}
-              </button>
-
-              <button
-                className={`md:hidden p-2 rounded-btn transition-colors ${
-                  transparent ? 'text-white hover:bg-white/10' : 'text-text-main hover:bg-border/30'
-                }`}
-                onClick={() => setOpen((v) => !v)}
-                aria-label="Toggle menu"
-              >
-                {open ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
+            {/* Mobile hamburger */}
+            <button
+              className={`md:hidden p-2 rounded-btn transition-colors ${
+                transparent ? 'text-white hover:bg-white/10' : 'text-text-main hover:bg-border/30'
+              }`}
+              onClick={() => setOpen((v) => !v)}
+              aria-label="Toggle menu"
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
       </div>
 
       {/* ── Mobile menu ────────────────────────────────────────────────────── */}
       {open && (
-        <div className="md:hidden bg-surface dark:bg-[#1a1a1a] border-t border-border shadow-lg">
+        <div className="md:hidden bg-surface border-t border-border shadow-lg">
           <div className="px-4 py-3 space-y-0.5">
             {NAV_LINKS.map(({ to, label }) => (
               <NavLink
@@ -149,7 +133,7 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `block px-4 py-2.5 rounded-btn text-sm font-medium transition-colors ${
                     isActive
-                      ? 'bg-[#1A1A1A]/5 dark:bg-white/10 text-[#1A1A1A] dark:text-white font-semibold'
+                      ? 'bg-[#1A1A1A]/5 text-[#1A1A1A] font-semibold'
                       : 'text-text-muted hover:text-text-main hover:bg-border/30'
                   }`
                 }

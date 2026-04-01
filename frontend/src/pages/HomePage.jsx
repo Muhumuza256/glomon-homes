@@ -97,14 +97,14 @@ const DEFAULT_HERO = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539
 function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className={`border rounded-[6px] overflow-hidden transition-colors ${open ? 'border-[#1A1A1A]/30 dark:border-white/20' : 'border-border'}`}>
+    <div className={`border rounded-[6px] overflow-hidden transition-colors ${open ? 'border-[#1A1A1A]/30' : 'border-border'}`}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between px-5 py-4 text-left bg-surface hover:bg-[#1A1A1A]/3 dark:hover:bg-white/3 transition-colors"
+        className="w-full flex items-center justify-between px-5 py-4 text-left bg-surface hover:bg-[#1A1A1A]/3 transition-colors"
       >
         <span className="font-medium text-text-main text-[14px] pr-6">{q}</span>
         {open ? (
-          <ChevronUp size={15} className="text-[#1A1A1A] dark:text-white shrink-0" />
+          <ChevronUp size={15} className="text-[#1A1A1A] shrink-0" />
         ) : (
           <ChevronDown size={15} className="text-text-muted shrink-0" />
         )}
@@ -349,8 +349,8 @@ export default function HomePage() {
               <Link key={type} to={`/listings?type=${type}`}
                 className="group p-7 bg-surface rounded-card shadow-card hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-center"
               >
-                <div className="w-12 h-12 bg-[#1A1A1A]/5 group-hover:bg-[#1A1A1A] dark:bg-white/10 dark:group-hover:bg-accent rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors duration-300">
-                  <Icon size={22} className="text-[#1A1A1A] dark:text-white group-hover:text-white transition-colors duration-300" />
+                <div className="w-12 h-12 bg-[#1A1A1A]/5 group-hover:bg-[#1A1A1A] rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors duration-300">
+                  <Icon size={22} className="text-[#1A1A1A] group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 className="font-display font-semibold text-text-main text-[15px] mb-1">{label}</h3>
                 <p className="text-xs text-text-muted">{desc}</p>
@@ -370,11 +370,11 @@ export default function HomePage() {
           <div className="flex flex-wrap justify-center gap-3">
             {LOCATIONS.map(({ name, area }) => (
               <Link key={name} to={`/listings?district=${name}`}
-                className="flex items-center gap-2 px-5 py-3 bg-bg border border-border rounded-full hover:border-[#1A1A1A] dark:hover:border-white hover:bg-[#1A1A1A] dark:hover:bg-white transition-all group"
+                className="flex items-center gap-2 px-5 py-3 bg-bg border border-border rounded-full hover:border-[#1A1A1A] hover:bg-[#1A1A1A] transition-all group"
               >
-                <MapPin size={13} className="text-accent group-hover:text-white dark:group-hover:text-accent" />
-                <span className="font-medium text-sm text-text-main group-hover:text-white dark:group-hover:text-[#1A1A1A] transition-colors">{name}</span>
-                <span className="text-xs text-text-muted group-hover:text-white/70 dark:group-hover:text-[#1A1A1A]/60 transition-colors">· {area}</span>
+                <MapPin size={13} className="text-accent group-hover:text-white" />
+                <span className="font-medium text-sm text-text-main group-hover:text-white transition-colors">{name}</span>
+                <span className="text-xs text-text-muted group-hover:text-white/70 transition-colors">· {area}</span>
               </Link>
             ))}
           </div>
@@ -396,8 +396,8 @@ export default function HomePage() {
                 </div>
                 <p className="text-text-muted text-sm leading-relaxed flex-1 mb-5">"{text}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-[#1A1A1A] dark:bg-white flex items-center justify-center shrink-0">
-                    <span className="text-white dark:text-[#1A1A1A] font-bold text-sm">{name[0]}</span>
+                  <div className="w-9 h-9 rounded-full bg-[#1A1A1A] flex items-center justify-center shrink-0">
+                    <span className="text-white font-bold text-sm">{name[0]}</span>
                   </div>
                   <div>
                     <p className="font-semibold text-text-main text-sm">{name}</p>

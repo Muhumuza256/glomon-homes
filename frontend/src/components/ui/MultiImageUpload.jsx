@@ -101,7 +101,7 @@ export default function MultiImageUpload({ images = [], onChange }) {
             disabled={uploading || !canAdd}
             className={`w-full h-full rounded-[6px] border-2 border-dashed flex flex-col items-center justify-center gap-1.5 transition-colors ${
               canAdd
-                ? 'border-border hover:border-[#1A1A1A]/30 dark:hover:border-white/30 cursor-pointer'
+                ? 'border-border hover:border-[#1A1A1A]/30 cursor-pointer'
                 : 'border-border/30 cursor-not-allowed opacity-30'
             }`}
           >
@@ -171,7 +171,7 @@ export default function MultiImageUpload({ images = [], onChange }) {
             onChange(next.filter(Boolean))
           }}
           placeholder="…or paste cover image URL"
-          className="flex-1 border border-border rounded-btn px-3 py-2 text-xs text-text-muted focus:outline-none focus:border-[#1A1A1A] dark:focus:border-white/50 transition-colors bg-transparent"
+          className="flex-1 border border-border rounded-btn px-3 py-2 text-xs text-text-muted focus:outline-none focus:border-[#1A1A1A] transition-colors bg-transparent"
         />
       </div>
     </div>
