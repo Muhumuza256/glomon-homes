@@ -31,7 +31,8 @@ export default {
         btn:  '8px',
       },
       boxShadow: {
-        card: '0 2px 16px rgba(0,0,0,0.06)',
+        card: '0 1px 4px rgba(0,0,0,0.07), 0 2px 12px rgba(0,0,0,0.05)',
+        'card-hover': '0 4px 20px rgba(0,0,0,0.12)',
       },
     },
   },

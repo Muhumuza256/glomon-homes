@@ -11,6 +11,16 @@ const QUICK_LINKS = [
   { to: '/contact', label: 'Contact' },
 ]
 
+const PROPERTY_TYPES = [
+  { to: '/listings?type=APARTMENT', label: 'Apartments' },
+  { to: '/listings?type=HOUSE', label: 'Houses' },
+  { to: '/listings?type=LAND', label: 'Land & Plots' },
+  { to: '/listings?type=COMMERCIAL', label: 'Commercial' },
+  { to: '/listings?type=VILLA', label: 'Villas' },
+  { to: '/listings?priceType=RENT', label: 'For Rent' },
+  { to: '/listings?priceType=SALE', label: 'For Sale' },
+]
+
 const SOCIALS = [
   { href: 'https://facebook.com', icon: Facebook, label: 'Facebook' },
   { href: 'https://instagram.com', icon: Instagram, label: 'Instagram' },
@@ -22,24 +32,23 @@ const WA_NUMBER = '256700000000'
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1A3A6B] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div className="lg:col-span-2">
+    <footer className="bg-[#111111] text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+          {/* Brand column */}
+          <div className="lg:col-span-1">
             <div className="mb-5 flex flex-col leading-none">
-              <span className="font-display font-bold text-[22px] tracking-[0.04em] text-white">
-                Glomon<span className="text-[#F97316]"> Homes</span>
+              <span className="font-display font-bold text-[20px] tracking-[0.05em] text-white">
+                GLOMON<span className="text-accent"> HOMES</span>
               </span>
-              <span className="text-[8.5px] font-semibold tracking-[0.28em] uppercase text-[#F97316]/60 mt-0.5">
-                Real Estate
+              <span className="text-[7px] font-semibold tracking-[0.35em] uppercase text-white/35 mt-1">
+                Real Estate Uganda
               </span>
             </div>
-            <p className="text-white/65 text-sm leading-relaxed max-w-xs mb-6">
-              Find Your Place in Uganda. Verified property listings across Kampala, Wakiso, Entebbe, Mukono and beyond.
+            <p className="text-white/55 text-[13px] leading-relaxed mb-6 max-w-[240px]">
+              Find Your Place in Uganda. Verified listings across Kampala, Wakiso, Entebbe, Mukono and beyond.
             </p>
-            {/* Social icons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5">
               {SOCIALS.map(({ href, icon: Icon, label }) => (
                 <a
                   key={label}
@@ -47,9 +56,9 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#F97316] flex items-center justify-center transition-colors"
+                  className="w-8 h-8 rounded-full border border-white/15 hover:border-accent hover:bg-accent flex items-center justify-center transition-all"
                 >
-                  <Icon size={16} />
+                  <Icon size={14} />
                 </a>
               ))}
             </div>
@@ -57,13 +66,34 @@ export default function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 className="font-display font-semibold text-base mb-4">Quick Links</h4>
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/40 mb-5">
+              Navigate
+            </h4>
             <ul className="space-y-2.5">
               {QUICK_LINKS.map(({ to, label }) => (
                 <li key={label}>
                   <Link
                     to={to}
-                    className="text-white/65 hover:text-[#F97316] text-sm transition-colors"
+                    className="text-white/60 hover:text-white text-[13px] transition-colors"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Property types */}
+          <div>
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/40 mb-5">
+              Properties
+            </h4>
+            <ul className="space-y-2.5">
+              {PROPERTY_TYPES.map(({ to, label }) => (
+                <li key={label}>
+                  <Link
+                    to={to}
+                    className="text-white/60 hover:text-white text-[13px] transition-colors"
                   >
                     {label}
                   </Link>
@@ -74,18 +104,20 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display font-semibold text-base mb-4">Get In Touch</h4>
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/40 mb-5">
+              Contact
+            </h4>
             <ul className="space-y-3.5">
-              <li className="flex items-start gap-3 text-sm text-white/65">
-                <MapPin size={14} className="mt-0.5 shrink-0 text-[#F97316]" />
+              <li className="flex items-start gap-3 text-[13px] text-white/60">
+                <MapPin size={13} className="mt-0.5 shrink-0 text-accent" />
                 Plot 45 Kira Road,<br />Kampala, Uganda
               </li>
               <li>
                 <a
                   href="tel:+256700000000"
-                  className="flex items-center gap-3 text-sm text-white/65 hover:text-[#F97316] transition-colors"
+                  className="flex items-center gap-3 text-[13px] text-white/60 hover:text-white transition-colors"
                 >
-                  <Phone size={14} className="shrink-0 text-[#F97316]" />
+                  <Phone size={13} className="shrink-0 text-accent" />
                   +256 700 000 000
                 </a>
               </li>
@@ -94,18 +126,18 @@ export default function Footer() {
                   href={`https://wa.me/${WA_NUMBER}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-sm text-white/65 hover:text-[#F97316] transition-colors"
+                  className="flex items-center gap-3 text-[13px] text-white/60 hover:text-white transition-colors"
                 >
-                  <MessageCircle size={14} className="shrink-0 text-[#F97316]" />
+                  <MessageCircle size={13} className="shrink-0 text-accent" />
                   WhatsApp Us
                 </a>
               </li>
               <li>
                 <a
                   href="mailto:info@glomonhomes.com"
-                  className="flex items-center gap-3 text-sm text-white/65 hover:text-[#F97316] transition-colors"
+                  className="flex items-center gap-3 text-[13px] text-white/60 hover:text-white transition-colors"
                 >
-                  <Mail size={14} className="shrink-0 text-[#F97316]" />
+                  <Mail size={13} className="shrink-0 text-accent" />
                   info@glomonhomes.com
                 </a>
               </li>
@@ -114,11 +146,15 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center">
-          <p className="text-white/40 text-xs">
-            © 2025 Glomon Homes. All rights reserved.
+      <div className="border-t border-white/8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-white/30 text-[11px]">
+            © {new Date().getFullYear()} Glomon Homes. All rights reserved.
           </p>
+          <div className="flex items-center gap-5">
+            <Link to="/listings" className="text-white/30 hover:text-white/60 text-[11px] transition-colors">Privacy Policy</Link>
+            <Link to="/listings" className="text-white/30 hover:text-white/60 text-[11px] transition-colors">Terms of Use</Link>
+          </div>
         </div>
       </div>
     </footer>

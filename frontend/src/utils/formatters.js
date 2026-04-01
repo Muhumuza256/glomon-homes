@@ -24,7 +24,7 @@ export function formatDate(dateString) {
  * Returns a fallback placeholder image URL if no cover image is set.
  */
 export function getPropertyImage(url) {
-  return url || 'https://placehold.co/800x600/1A3A6B/white?text=Glomon+Homes'
+  return url || 'https://placehold.co/800x600/1A1A1A/white?text=Glomon+Homes'
 }
 
 /**

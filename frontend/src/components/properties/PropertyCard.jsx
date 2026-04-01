@@ -14,6 +14,7 @@ export default function PropertyCard({ property }) {
     priceType,
     currency,
     location,
+    district,
     bedrooms,
     bathrooms,
     area,
@@ -31,18 +32,18 @@ export default function PropertyCard({ property }) {
   return (
     <Link
       to={`/listings/${id}`}
-      className="group block bg-surface rounded-card shadow-card hover:shadow-lg transition-all duration-300 hover:-translate-y-1 overflow-hidden"
+      className="group block bg-surface rounded-[4px] overflow-hidden border border-border hover:border-[#1A1A1A]/30 dark:hover:border-white/30 shadow-card hover:shadow-card-hover transition-all duration-300"
     >
       {/* Image */}
-      <div className="relative h-52 overflow-hidden bg-gray-100">
+      <div className="relative h-52 overflow-hidden bg-[#F0F0EE]">
         <img
           src={getPropertyImage(coverImage)}
           alt={title}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
           loading="lazy"
         />
 
-        {/* Badges top-left */}
+        {/* Status badges */}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
           <Badge variant={priceType === 'SALE' ? 'sale' : 'rent'}>
             For {priceType === 'SALE' ? 'Sale' : 'Rent'}
@@ -50,29 +51,27 @@ export default function PropertyCard({ property }) {
           {featured && <Badge variant="featured">Featured</Badge>}
         </div>
 
-        {/* WhatsApp button — bottom-right */}
+        {/* WhatsApp pill */}
         {!isClosed && (
           <a
             href={`https://wa.me/${WA_NUMBER}?text=${waText}`}
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-green-500 hover:bg-green-600 text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-full shadow transition-colors"
+            className="absolute bottom-3 right-3 flex items-center gap-1.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-[11px] font-semibold px-2.5 py-1.5 rounded-full shadow-sm transition-colors"
             aria-label="WhatsApp enquiry"
           >
-            <MessageCircle size={13} />
+            <MessageCircle size={12} />
             WhatsApp
           </a>
         )}
 
         {/* Sold / Rented overlay */}
         {isClosed && (
-          <div className="absolute inset-0 bg-black/45 flex items-center justify-center">
-            <span
-              className={`font-bold px-4 py-1.5 rounded-full text-sm tracking-widest text-white ${
-                status === 'SOLD' ? 'bg-red-600' : 'bg-blue-600'
-              }`}
-            >
+          <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+            <span className={`font-bold px-5 py-1.5 text-sm tracking-[0.15em] text-white uppercase ${
+              status === 'SOLD' ? 'bg-red-600' : 'bg-blue-600'
+            } rounded-full`}>
               {status}
             </span>
           </div>
@@ -80,38 +79,40 @@ export default function PropertyCard({ property }) {
       </div>
 
       {/* Body */}
-      <div className="p-4">
-        <p className="text-[11px] font-semibold text-text-muted uppercase tracking-widest mb-1">
+      <div className="p-4 pt-3.5">
+        {/* Type label */}
+        <p className="text-[10px] font-bold text-text-muted uppercase tracking-[0.18em] mb-1.5">
           {propertyType.charAt(0) + propertyType.slice(1).toLowerCase()}
+          {district ? ` · ${district}` : ''}
         </p>
 
-        <h3 className="font-display font-semibold text-text-main text-[15px] leading-snug line-clamp-2 mb-2 group-hover:text-primary transition-colors">
+        <h3 className="font-display font-semibold text-text-main text-[15px] leading-snug line-clamp-2 mb-2 group-hover:text-accent transition-colors">
           {title}
         </h3>
 
-        <div className="flex items-center gap-1 text-text-muted text-sm mb-3">
-          <MapPin size={12} className="shrink-0 text-accent" />
-          <span className="truncate text-[13px]">{location}</span>
+        <div className="flex items-center gap-1 text-text-muted mb-3.5">
+          <MapPin size={11} className="shrink-0" />
+          <span className="truncate text-[12px]">{location}</span>
         </div>
 
-        {/* Stat row */}
+        {/* Stats row */}
         {(bedrooms || bathrooms || area) && (
-          <div className="flex items-center gap-4 text-text-muted text-[13px] pt-3 mb-3 border-t border-border">
+          <div className="flex items-center gap-4 text-[12px] text-text-muted pt-3 mb-3.5 border-t border-border">
             {bedrooms && (
-              <span className="flex items-center gap-1.5">
-                <Bed size={13} className="text-primary/50" />
+              <span className="flex items-center gap-1">
+                <Bed size={12} />
                 {bedrooms} {bedrooms === 1 ? 'Bed' : 'Beds'}
               </span>
             )}
             {bathrooms && (
-              <span className="flex items-center gap-1.5">
-                <Bath size={13} className="text-primary/50" />
+              <span className="flex items-center gap-1">
+                <Bath size={12} />
                 {bathrooms} {bathrooms === 1 ? 'Bath' : 'Baths'}
               </span>
             )}
             {area && (
-              <span className="flex items-center gap-1.5">
-                <Maximize2 size={13} className="text-primary/50" />
+              <span className="flex items-center gap-1">
+                <Maximize2 size={12} />
                 {area} m²
               </span>
             )}
@@ -121,18 +122,18 @@ export default function PropertyCard({ property }) {
         {/* Price row */}
         <div className="flex items-end justify-between">
           <div>
-            <p className="font-display font-bold text-primary text-[17px] leading-none">
+            <p className="font-display font-bold text-[#1A1A1A] dark:text-white text-[18px] leading-none">
               {formatPrice(price, currency)}
             </p>
             {usdLabel && (
               <p className="text-[11px] text-text-muted mt-0.5">{usdLabel}</p>
             )}
             {priceType === 'RENT' && (
-              <p className="text-[11px] text-text-muted mt-0.5">per month</p>
+              <p className="text-[11px] text-text-muted mt-0.5">/ month</p>
             )}
           </div>
-          <span className="text-[11px] font-semibold text-primary bg-primary/5 group-hover:bg-primary group-hover:text-white px-3 py-1.5 rounded-full transition-colors">
-            View →
+          <span className="text-[11px] font-semibold text-text-muted group-hover:text-accent group-hover:underline transition-colors">
+            View details →
           </span>
         </div>
       </div>

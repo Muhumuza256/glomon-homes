@@ -2,30 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ── Light mode (default) ─────────────────────────────────────────────────── */
+/* ── Light mode (default) — Compass-inspired palette ─────────────────────── */
 :root {
-  --color-primary:       26 58 107;   /* #1A3A6B */
-  --color-primary-light: 43 91 168;   /* #2B5BA8 */
-  --color-accent:        249 115 22;  /* #F97316 */
-  --color-accent-hover:  234 106 10;  /* #EA6A0A */
-  --color-bg:            248 250 255; /* #F8FAFF */
-  --color-surface:       255 255 255; /* #FFFFFF */
-  --color-text:          26 26 46;    /* #1A1A2E */
-  --color-text-muted:    100 116 139; /* #64748B */
-  --color-border:        226 232 240; /* #E2E8F0 */
+  --color-primary:       26 26 26;    /* #1A1A1A  charcoal-black   */
+  --color-primary-light: 64 64 64;    /* #404040  dark gray        */
+  --color-accent:        220 80 0;    /* #DC5000  rich burnt orange */
+  --color-accent-hover:  190 64 0;    /* #BE4000                   */
+  --color-bg:            246 246 244; /* #F6F6F4  warm off-white   */
+  --color-surface:       255 255 255; /* #FFFFFF  pure white       */
+  --color-text:          26 26 26;    /* #1A1A1A                   */
+  --color-text-muted:    107 107 107; /* #6B6B6B  medium gray      */
+  --color-border:        229 229 229; /* #E5E5E5  very light gray  */
 }
 
 /* ── Dark mode ───────────────────────────────────────────────────────────── */
 .dark {
-  --color-primary:       96 165 250;  /* blue-400 — pops on dark bg */
-  --color-primary-light: 147 197 253; /* blue-300 */
-  --color-accent:        249 115 22;  /* same orange */
-  --color-accent-hover:  234 106 10;
-  --color-bg:            15 23 42;    /* slate-900 */
-  --color-surface:       30 41 59;    /* slate-800 */
-  --color-text:          241 245 249; /* slate-100 */
-  --color-text-muted:    148 163 184; /* slate-400 */
-  --color-border:        51 65 85;    /* slate-700 */
+  --color-primary:       229 229 229; /* near-white on dark bg */
+  --color-primary-light: 200 200 200;
+  --color-accent:        220 80 0;    /* keep orange */
+  --color-accent-hover:  190 64 0;
+  --color-bg:            15 15 15;    /* true dark */
+  --color-surface:       26 26 26;    /* charcoal surface */
+  --color-text:          241 241 241;
+  --color-text-muted:    161 161 161;
+  --color-border:        55 55 55;
 }
 
 body {

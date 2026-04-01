@@ -97,21 +97,21 @@ const DEFAULT_HERO = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539
 function FaqItem({ q, a }) {
   const [open, setOpen] = useState(false)
   return (
-    <div className="border border-border rounded-card overflow-hidden">
+    <div className={`border rounded-[6px] overflow-hidden transition-colors ${open ? 'border-[#1A1A1A]/30 dark:border-white/20' : 'border-border'}`}>
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-full flex items-center justify-between px-5 py-4 text-left bg-surface hover:bg-primary/3 transition-colors"
+        className="w-full flex items-center justify-between px-5 py-4 text-left bg-surface hover:bg-[#1A1A1A]/3 dark:hover:bg-white/3 transition-colors"
       >
-        <span className="font-medium text-text-main text-sm pr-4">{q}</span>
+        <span className="font-medium text-text-main text-[14px] pr-6">{q}</span>
         {open ? (
-          <ChevronUp size={16} className="text-accent shrink-0" />
+          <ChevronUp size={15} className="text-[#1A1A1A] dark:text-white shrink-0" />
         ) : (
-          <ChevronDown size={16} className="text-text-muted shrink-0" />
+          <ChevronDown size={15} className="text-text-muted shrink-0" />
         )}
       </button>
       {open && (
         <div className="px-5 pb-4 bg-surface border-t border-border">
-          <p className="text-text-muted text-sm leading-relaxed pt-3">{a}</p>
+          <p className="text-text-muted text-[13px] leading-relaxed pt-3">{a}</p>
         </div>
       )}
     </div>
@@ -213,8 +213,8 @@ export default function HomePage() {
           />
         )}
 
-        {/* Navy overlay */}
-        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(26,58,107,0.65)' }} />
+        {/* Dark overlay */}
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(10,10,10,0.68)' }} />
 
         {/* Content */}
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center py-40">
@@ -250,7 +250,7 @@ export default function HomePage() {
               <option value="">Any type</option>
               {SEARCH_TYPES.map((t) => (<option key={t} value={t}>{t.charAt(0) + t.slice(1).toLowerCase()}</option>))}
             </select>
-            <button type="submit" className="flex items-center justify-center gap-2 px-6 py-3 bg-accent hover:bg-accent-hover text-white rounded-btn font-semibold text-sm transition-colors whitespace-nowrap">
+            <button type="submit" className="flex items-center justify-center gap-2 px-6 py-3 bg-[#1A1A1A] hover:bg-accent text-white rounded-btn font-semibold text-sm transition-colors whitespace-nowrap">
               <Search size={15} />
               Search
             </button>
@@ -349,8 +349,8 @@ export default function HomePage() {
               <Link key={type} to={`/listings?type=${type}`}
                 className="group p-7 bg-surface rounded-card shadow-card hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-center"
               >
-                <div className="w-12 h-12 bg-primary/5 group-hover:bg-primary rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors duration-300">
-                  <Icon size={22} className="text-primary group-hover:text-white transition-colors duration-300" />
+                <div className="w-12 h-12 bg-[#1A1A1A]/5 group-hover:bg-[#1A1A1A] dark:bg-white/10 dark:group-hover:bg-accent rounded-xl flex items-center justify-center mx-auto mb-4 transition-colors duration-300">
+                  <Icon size={22} className="text-[#1A1A1A] dark:text-white group-hover:text-white transition-colors duration-300" />
                 </div>
                 <h3 className="font-display font-semibold text-text-main text-[15px] mb-1">{label}</h3>
                 <p className="text-xs text-text-muted">{desc}</p>
@@ -370,11 +370,11 @@ export default function HomePage() {
           <div className="flex flex-wrap justify-center gap-3">
             {LOCATIONS.map(({ name, area }) => (
               <Link key={name} to={`/listings?district=${name}`}
-                className="flex items-center gap-2 px-5 py-3 bg-bg border border-border rounded-full hover:border-primary hover:bg-primary/5 transition-all group"
+                className="flex items-center gap-2 px-5 py-3 bg-bg border border-border rounded-full hover:border-[#1A1A1A] dark:hover:border-white hover:bg-[#1A1A1A] dark:hover:bg-white transition-all group"
               >
-                <MapPin size={13} className="text-accent" />
-                <span className="font-medium text-sm text-text-main group-hover:text-primary transition-colors">{name}</span>
-                <span className="text-xs text-text-muted">· {area}</span>
+                <MapPin size={13} className="text-accent group-hover:text-white dark:group-hover:text-accent" />
+                <span className="font-medium text-sm text-text-main group-hover:text-white dark:group-hover:text-[#1A1A1A] transition-colors">{name}</span>
+                <span className="text-xs text-text-muted group-hover:text-white/70 dark:group-hover:text-[#1A1A1A]/60 transition-colors">· {area}</span>
               </Link>
             ))}
           </div>
@@ -396,8 +396,8 @@ export default function HomePage() {
                 </div>
                 <p className="text-text-muted text-sm leading-relaxed flex-1 mb-5">"{text}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <span className="text-primary font-bold text-sm">{name[0]}</span>
+                  <div className="w-9 h-9 rounded-full bg-[#1A1A1A] dark:bg-white flex items-center justify-center shrink-0">
+                    <span className="text-white dark:text-[#1A1A1A] font-bold text-sm">{name[0]}</span>
                   </div>
                   <div>
                     <p className="font-semibold text-text-main text-sm">{name}</p>
@@ -482,17 +482,20 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA Banner ───────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 bg-accent">
+      <section className="py-24 px-4 sm:px-6 bg-[#1A1A1A]">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-3">
-            List Your Property With Us
+          <p className="text-accent font-semibold text-xs uppercase tracking-[0.18em] mb-4">
+            List with us
+          </p>
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+            List Your Property With Glomon Homes
           </h2>
-          <p className="text-white/80 text-lg mb-8 leading-relaxed">
+          <p className="text-white/60 text-lg mb-10 leading-relaxed max-w-xl mx-auto">
             Reach thousands of qualified buyers and renters across Uganda.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-white text-primary font-bold px-8 py-4 rounded-btn hover:bg-gray-50 transition-colors text-sm shadow-lg"
+            className="inline-flex items-center gap-2 bg-white text-[#1A1A1A] font-bold px-8 py-4 rounded-btn hover:bg-accent hover:text-white transition-colors text-sm"
           >
             Get In Touch <ChevronRight size={16} />
           </Link>
