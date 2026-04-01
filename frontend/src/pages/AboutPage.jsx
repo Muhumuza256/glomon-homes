@@ -39,7 +39,7 @@ const HOURS = [
   { day: 'Sunday', time: 'Closed' },
 ]
 
-const WA_NUMBER = '256781106837' // Glomon Homes WhatsApp number (updated from placeholder)
+const WA_NUMBER = '256704079274'
 
 export default function AboutPage() {
   return (
@@ -201,10 +201,10 @@ export default function AboutPage() {
               </div>
               <h4 className="font-display font-semibold text-white text-base mb-2">Call or WhatsApp</h4>
               <a
-                href="tel:+256700000000"
+                href="tel:+256704079274"
                 className="block text-white/65 hover:text-accent text-sm transition-colors mb-1"
               >
-                +256 700 000 000
+                +256 704 079274
               </a>
               <a
                 href={`https://wa.me/${WA_NUMBER}`}

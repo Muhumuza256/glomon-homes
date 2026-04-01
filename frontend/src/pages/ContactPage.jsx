@@ -14,7 +14,7 @@ const HOURS = [
   { day: 'Sunday', time: 'Closed' },
 ]
 
-const WA_NUMBER = '256781106837' // Glomon Homes WhatsApp number (updated from placeholder)
+const WA_NUMBER = '256704079274'
 
 export default function ContactPage() {
   const { submit, loading, error, success, reset } = useSubmitEnquiry()
@@ -107,7 +107,7 @@ export default function ContactPage() {
                           type="tel"
                           value={form.phone}
                           onChange={(e) => set('phone', e.target.value)}
-                          placeholder="+256 700 000 000"
+                          placeholder="+256 704 079274"
                           className={inputCls}
                         />
                       </div>
@@ -198,10 +198,10 @@ export default function ContactPage() {
                       Phone
                     </p>
                     <a
-                      href="tel:+256700000000"
+                      href="tel:+256704079274"
                       className="text-text-muted hover:text-primary text-sm transition-colors"
                     >
-                      +256 700 000 000
+                      +256 704 079274
                     </a>
                   </div>
                 </div>

@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { MessageCircle, X } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 
-const WA_NUMBER = '256781106837'
+const WA_NUMBER = '256704079274'
 const WA_MSG = encodeURIComponent('Hi Glomon Homes, I have a question about your properties.')
 
 export default function FloatingWhatsApp() {

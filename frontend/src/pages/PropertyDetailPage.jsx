@@ -52,7 +52,7 @@ function StatBox({ icon: Icon, value, label }) {
   )
 }
 
-const WA_NUMBER = '256781106837' // Glomon Homes WhatsApp number (updated from placeholder)
+const WA_NUMBER = '256704079274'
 
 export default function PropertyDetailPage() {
   const { id } = useParams()
@@ -302,11 +302,11 @@ export default function PropertyDetailPage() {
                     WhatsApp Us
                   </a>
                   <a
-                    href="tel:+256700000000"
+                    href="tel:+256704079274"
                     className="flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white px-4 py-2.5 rounded-btn font-medium text-sm transition-colors w-full"
                   >
                     <Phone size={15} />
-                    +256 700 000 000
+                    +256 704 079274
                   </a>
                 </div>
 

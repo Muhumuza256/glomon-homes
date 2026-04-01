@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
-import { Menu, X, Phone, MessageCircle, Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
+import { Menu, X, Phone, MessageCircle, Instagram } from 'lucide-react'
 
 const NAV_LINKS = [
   { to: '/', label: 'Home' },
@@ -9,7 +9,15 @@ const NAV_LINKS = [
   { to: '/contact', label: 'Contact' },
 ]
 
-const WA_NUMBER = '256700000000'
+const WA_NUMBER = '256704079274'
+
+function TikTokIcon({ size = 16 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.77a4.85 4.85 0 0 1-1.01-.08z"/>
+    </svg>
+  )
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
@@ -33,9 +41,9 @@ export default function Navbar() {
       <div className="bg-[#1A1A1A] text-white/80 text-[12.5px]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-4">
           <div className="flex items-center gap-6">
-            <a href="tel:+256700000000" className="flex items-center gap-2 hover:text-white transition-colors font-medium">
+            <a href="tel:+256704079274" className="flex items-center gap-2 hover:text-white transition-colors font-medium">
               <Phone size={14} />
-              +256 700 000 000
+              +256 704 079274
             </a>
             <a
               href={`https://wa.me/${WA_NUMBER}`}
@@ -47,10 +55,22 @@ export default function Navbar() {
             </a>
           </div>
           <div className="flex items-center gap-4">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Facebook"><Facebook size={16} /></a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram"><Instagram size={16} /></a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Twitter"><Twitter size={16} /></a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="YouTube"><Youtube size={16} /></a>
+            <a
+              href="https://www.instagram.com/glomon_homes_co._ltd?igsh=MTUzbWpzN3RlNzk4Nw=="
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+              aria-label="Instagram"
+            >
+              <Instagram size={16} />
+            </a>
+            <a
+              href="https://www.tiktok.com/@glomon_homes_co_ltd?_r=1&_t=ZS-95BXoIeagLZ"
+              target="_blank" rel="noopener noreferrer"
+              className="hover:text-white transition-colors"
+              aria-label="TikTok"
+            >
+              <TikTokIcon size={15} />
+            </a>
           </div>
         </div>
       </div>

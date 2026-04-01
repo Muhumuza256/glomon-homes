@@ -4,7 +4,7 @@ import Badge from '../ui/Badge'
 import { formatPrice, getPropertyImage, formatPriceWithUSD } from '../../utils/formatters'
 import { useCurrency } from '../../context/CurrencyContext'
 
-const WA_NUMBER = '256700000000'
+const WA_NUMBER = '256704079274'
 
 export default function PropertyCard({ property }) {
   const {
