@@ -317,7 +317,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Why Glomon Homes ─────────────────────────────────────────────── */}
-      <section className="py-20 bg-primary">
+      <section className="py-20 bg-[#1A1A1A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
             <p className="text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-2">Why choose us</p>

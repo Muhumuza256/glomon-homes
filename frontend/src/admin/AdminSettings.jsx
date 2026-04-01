@@ -41,7 +41,7 @@ export default function AdminSettings() {
       <div className="max-w-2xl space-y-6">
 
         {/* Hero Image */}
-        <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-5">
+        <section className="bg-surface rounded-card shadow-card p-5 sm:p-6 space-y-5">
           <div className="border-b border-border pb-3">
             <h3 className="font-display font-semibold text-text-main text-base">
               Homepage Hero Image

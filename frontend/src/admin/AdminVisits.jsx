@@ -100,13 +100,13 @@ export default function AdminVisits() {
             <Spinner size="lg" />
           </div>
         ) : visits.length === 0 ? (
-          <div className="bg-white rounded-card shadow-card py-20 text-center">
+          <div className="bg-surface rounded-card shadow-card py-20 text-center">
             <p className="text-text-muted text-sm">
               No visit bookings{statusFilter ? ` with status "${statusFilter}"` : ''} yet.
             </p>
           </div>
         ) : (
-          <div className="bg-white rounded-card shadow-card overflow-hidden divide-y divide-border">
+          <div className="bg-surface rounded-card shadow-card overflow-hidden divide-y divide-border">
             {visits.map((visit) => {
               const isOpen = expanded === visit.id
 
@@ -216,7 +216,7 @@ export default function AdminVisits() {
                               {visit.timeSlot}
                             </div>
                             {visit.notes && (
-                              <p className="text-sm text-text-main leading-relaxed whitespace-pre-wrap bg-white border border-border rounded-btn p-3 mt-2">
+                              <p className="text-sm text-text-main leading-relaxed whitespace-pre-wrap bg-bg border border-border rounded-btn p-3 mt-2">
                                 {visit.notes}
                               </p>
                             )}

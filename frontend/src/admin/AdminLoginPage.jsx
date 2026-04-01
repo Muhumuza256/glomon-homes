@@ -50,7 +50,7 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-primary flex items-center justify-center px-4">
+    <div className="min-h-screen bg-[#111111] flex items-center justify-center px-4">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
       </div>
@@ -66,7 +66,7 @@ export default function AdminLoginPage() {
         </div>
 
         {/* Card */}
-        <div className="bg-white rounded-card shadow-2xl p-8">
+        <div className="bg-surface rounded-card shadow-2xl p-8">
           <h2 className="font-display font-semibold text-text-main text-lg mb-6">Sign in</h2>
 
           {error && (

@@ -6,14 +6,14 @@ import api from '../services/api'
 
 function StatCard({ icon: Icon, label, value, color, loading }) {
   return (
-    <div className="bg-white rounded-card shadow-card p-6 flex items-center gap-4">
+    <div className="bg-surface rounded-card shadow-card p-6 flex items-center gap-4">
       <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${color}`}>
         <Icon size={22} className="text-white" />
       </div>
       <div>
         <p className="text-text-muted text-sm">{label}</p>
         {loading ? (
-          <div className="h-7 w-12 bg-gray-200 rounded animate-pulse mt-1" />
+          <div className="h-7 w-12 bg-border rounded animate-pulse mt-1" />
         ) : (
           <p className="font-display font-bold text-text-main text-2xl">{value ?? '—'}</p>
         )}
@@ -79,7 +79,7 @@ export default function AdminDashboard() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
               to="/admin/properties/new"
-              className="flex items-center gap-4 bg-white rounded-card shadow-card p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all group"
+              className="flex items-center gap-4 bg-surface rounded-card shadow-card p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all group"
             >
               <div className="w-10 h-10 bg-primary/10 group-hover:bg-primary rounded-xl flex items-center justify-center transition-colors">
                 <Plus size={18} className="text-primary group-hover:text-white transition-colors" />
@@ -93,7 +93,7 @@ export default function AdminDashboard() {
 
             <Link
               to="/admin/enquiries"
-              className="flex items-center gap-4 bg-white rounded-card shadow-card p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all group"
+              className="flex items-center gap-4 bg-surface rounded-card shadow-card p-5 hover:shadow-lg hover:-translate-y-0.5 transition-all group"
             >
               <div className="w-10 h-10 bg-blue-50 group-hover:bg-blue-500 rounded-xl flex items-center justify-center transition-colors">
                 <Mail size={18} className="text-blue-500 group-hover:text-white transition-colors" />
@@ -117,7 +117,7 @@ export default function AdminDashboard() {
               View all →
             </Link>
           </div>
-          <div className="bg-white rounded-card shadow-card p-5 text-center text-text-muted text-sm">
+          <div className="bg-surface rounded-card shadow-card p-5 text-center text-text-muted text-sm">
             <Link
               to="/admin/properties"
               className="inline-flex items-center gap-2 text-primary font-medium hover:underline"

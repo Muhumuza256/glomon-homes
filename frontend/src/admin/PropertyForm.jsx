@@ -23,7 +23,7 @@ const EMPTY = {
 }
 
 const inputCls =
-  'w-full border border-border rounded-btn px-3 py-2.5 text-sm text-text-main focus:outline-none focus:border-primary transition-colors bg-white'
+  'w-full border border-border rounded-btn px-3 py-2.5 text-sm text-text-main focus:outline-none focus:border-[#1A1A1A] dark:focus:border-white/50 transition-colors bg-surface'
 const labelCls = 'block text-xs font-medium text-text-main mb-1.5'
 
 function Field({ label, required, children }) {
@@ -107,7 +107,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       )}
 
       {/* ── Basic info ───────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-4">
+      <section className="bg-surface rounded-card shadow-card p-5 sm:p-6 space-y-4">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Basic Information
         </h3>
@@ -166,7 +166,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Pricing ──────────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-4">
+      <section className="bg-surface rounded-card shadow-card p-5 sm:p-6 space-y-4">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Pricing
         </h3>
@@ -206,7 +206,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Property details ─────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-4">
+      <section className="bg-surface rounded-card shadow-card p-5 sm:p-6 space-y-4">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Property Details
         </h3>
@@ -245,7 +245,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Location ─────────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-4">
+      <section className="bg-surface rounded-card shadow-card p-5 sm:p-6 space-y-4">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Location
         </h3>
@@ -284,7 +284,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Amenities ────────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-5 sm:p-6">
+      <section className="bg-surface rounded-card shadow-card p-5 sm:p-6">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3 mb-4">
           Amenities
         </h3>
@@ -309,7 +309,7 @@ export default function PropertyForm({ initial = EMPTY, isEdit = false, property
       </section>
 
       {/* ── Image & flags ────────────────────────────────────────────────── */}
-      <section className="bg-white rounded-card shadow-card p-5 sm:p-6 space-y-5">
+      <section className="bg-surface rounded-card shadow-card p-5 sm:p-6 space-y-5">
         <h3 className="font-display font-semibold text-text-main text-base border-b border-border pb-3">
           Image & Visibility
         </h3>

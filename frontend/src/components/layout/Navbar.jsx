@@ -32,27 +32,27 @@ export default function Navbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
       {/* ── Slim top bar ───────────────────────────────────────────────────── */}
-      <div className="bg-[#1A1A1A] dark:bg-black text-white/75 text-[11px]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-1.5 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-5">
-            <a href="tel:+256700000000" className="flex items-center gap-1.5 hover:text-white transition-colors">
-              <Phone size={11} />
+      <div className="bg-[#1A1A1A] dark:bg-black text-white/80 text-[12.5px]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-6">
+            <a href="tel:+256700000000" className="flex items-center gap-2 hover:text-white transition-colors font-medium">
+              <Phone size={14} />
               +256 700 000 000
             </a>
             <a
               href={`https://wa.me/${WA_NUMBER}`}
               target="_blank" rel="noopener noreferrer"
-              className="hidden sm:flex items-center gap-1.5 hover:text-white transition-colors"
+              className="hidden sm:flex items-center gap-2 hover:text-white transition-colors font-medium"
             >
-              <MessageCircle size={11} />
+              <MessageCircle size={14} />
               WhatsApp Us
             </a>
           </div>
-          <div className="flex items-center gap-3.5">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Facebook"><Facebook size={12} /></a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram"><Instagram size={12} /></a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Twitter"><Twitter size={12} /></a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="YouTube"><Youtube size={12} /></a>
+          <div className="flex items-center gap-4">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Facebook"><Facebook size={16} /></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Instagram"><Instagram size={16} /></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="Twitter"><Twitter size={16} /></a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" aria-label="YouTube"><Youtube size={16} /></a>
           </div>
         </div>
       </div>

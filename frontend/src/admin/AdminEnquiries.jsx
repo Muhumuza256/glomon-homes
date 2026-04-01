@@ -103,11 +103,11 @@ export default function AdminEnquiries() {
             <Spinner size="lg" />
           </div>
         ) : enquiries.length === 0 ? (
-          <div className="bg-white rounded-card shadow-card py-20 text-center">
+          <div className="bg-surface rounded-card shadow-card py-20 text-center">
             <p className="text-text-muted text-sm">No enquiries{statusFilter ? ` with status "${statusFilter}"` : ''} yet.</p>
           </div>
         ) : (
-          <div className="bg-white rounded-card shadow-card overflow-hidden divide-y divide-border">
+          <div className="bg-surface rounded-card shadow-card overflow-hidden divide-y divide-border">
             {enquiries.map((enq) => {
               const isOpen = expanded === enq.id
               const nextStatus = NEXT_STATUS[enq.status]
@@ -203,7 +203,7 @@ export default function AdminEnquiries() {
                           <h4 className="text-xs font-semibold text-text-muted uppercase tracking-wide mb-3">
                             Message
                           </h4>
-                          <p className="text-sm text-text-main leading-relaxed whitespace-pre-wrap bg-white border border-border rounded-btn p-3">
+                          <p className="text-sm text-text-main leading-relaxed whitespace-pre-wrap bg-bg border border-border rounded-btn p-3">
                             {enq.message}
                           </p>
                         </div>

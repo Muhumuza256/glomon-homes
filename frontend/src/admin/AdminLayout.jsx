@@ -98,7 +98,7 @@ export default function AdminLayout({ children, title }) {
   return (
     <div className="min-h-screen flex bg-bg">
       {/* ── Desktop sidebar (always visible ≥ md) ────────────────────────── */}
-      <aside className="hidden md:flex w-56 bg-primary flex-col fixed top-0 left-0 h-full z-40 shrink-0">
+      <aside className="hidden md:flex w-56 bg-[#111111] flex-col fixed top-0 left-0 h-full z-40 shrink-0">
         <SidebarContent onClose={null} />
       </aside>
 
@@ -110,7 +110,7 @@ export default function AdminLayout({ children, title }) {
         />
       )}
       <aside
-        className={`fixed top-0 left-0 h-full w-64 bg-primary flex flex-col z-50 transition-transform duration-300 md:hidden ${
+        className={`fixed top-0 left-0 h-full w-64 bg-[#111111] flex flex-col z-50 transition-transform duration-300 md:hidden ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -119,10 +119,10 @@ export default function AdminLayout({ children, title }) {
 
       {/* ── Main content ──────────────────────────────────────────────────── */}
       <div className="md:ml-56 flex-1 flex flex-col min-h-screen w-full">
-        <header className="bg-white border-b border-border px-4 sm:px-8 py-4 sticky top-0 z-30 flex items-center gap-3">
+        <header className="bg-surface dark:bg-[#1e1e1e] border-b border-border px-4 sm:px-8 py-4 sticky top-0 z-30 flex items-center gap-3">
           {/* Hamburger — mobile only */}
           <button
-            className="md:hidden p-1.5 rounded-btn text-text-muted hover:text-primary hover:bg-primary/5 transition-colors shrink-0"
+            className="md:hidden p-1.5 rounded-btn text-text-muted hover:text-text-main hover:bg-border/40 transition-colors shrink-0"
             onClick={() => setSidebarOpen(true)}
             aria-label="Open menu"
           >

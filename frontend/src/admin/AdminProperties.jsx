@@ -19,7 +19,7 @@ const STATUS_BADGE = {
 function ConfirmModal({ message, onConfirm, onCancel }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="bg-white rounded-card shadow-2xl p-6 max-w-sm w-full mx-4">
+      <div className="bg-surface rounded-card shadow-2xl p-6 max-w-sm w-full mx-4">
         <h3 className="font-display font-semibold text-text-main text-lg mb-2">Are you sure?</h3>
         <p className="text-text-muted text-sm mb-6">{message}</p>
         <div className="flex gap-3 justify-end">
@@ -129,7 +129,7 @@ export default function AdminProperties() {
             <Spinner size="lg" />
           </div>
         ) : properties.length === 0 ? (
-          <div className="bg-white rounded-card shadow-card text-center py-20">
+          <div className="bg-surface rounded-card shadow-card text-center py-20">
             <p className="text-text-muted text-sm mb-3">No properties yet.</p>
             <Link to="/admin/properties/new" className="text-sm text-primary font-medium hover:underline">
               Add your first property →
@@ -138,7 +138,7 @@ export default function AdminProperties() {
         ) : (
           <>
             {/* ── Desktop table ──────────────────────────────────────────── */}
-            <div className="hidden sm:block bg-white rounded-card shadow-card overflow-hidden">
+            <div className="hidden sm:block bg-surface rounded-card shadow-card overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
@@ -210,7 +210,7 @@ export default function AdminProperties() {
             {/* ── Mobile cards ───────────────────────────────────────────── */}
             <div className="sm:hidden space-y-3">
               {properties.map((p) => (
-                <div key={p.id} className="bg-white rounded-card shadow-card overflow-hidden">
+                <div key={p.id} className="bg-surface rounded-card shadow-card overflow-hidden">
                   <div className="flex gap-3 p-3">
                     <img
                       src={getPropertyImage(p.coverImage)}
