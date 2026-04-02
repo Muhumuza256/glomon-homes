@@ -4,6 +4,7 @@ import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
 import Spinner from '../components/ui/Spinner'
 import { useSubmitEnquiry } from '../hooks/useEnquiries'
+import SEO from '../components/SEO'
 
 const inputCls =
   'w-full border border-border rounded-btn px-3 py-2.5 text-sm text-text-main placeholder:text-text-muted/60 focus:outline-none focus:border-primary transition-colors bg-white'
@@ -28,6 +29,11 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <SEO
+        title="Contact Glomon Homes | Real Estate Enquiries in Uganda"
+        description="Get in touch with Glomon Homes for property enquiries, viewings or investment advice. Call, WhatsApp or email our Kampala office today."
+        noindex={false}
+      />
       <Navbar />
 
       {/* ── Page Header ───────────────────────────────────────────────────── */}

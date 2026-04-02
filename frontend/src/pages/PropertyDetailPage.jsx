@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import {
   MapPin,
   Bed,
@@ -22,6 +23,9 @@ import Spinner from '../components/ui/Spinner'
 import { useProperty, useProperties } from '../hooks/useProperties'
 import { formatPrice, formatDate, formatPriceWithUSD } from '../utils/formatters'
 import { useCurrency } from '../context/CurrencyContext'
+import SEO from '../components/SEO'
+
+const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80'
 
 const AMENITY_ICONS = {
   Parking: '🚗',
@@ -124,8 +128,42 @@ export default function PropertyDetailPage() {
     createdAt,
   } = property
 
+  const seoTitle = `${title} in ${location || district}`
+  const seoDescription = `${bedrooms ? bedrooms + '-bedroom ' : ''}${propertyType.charAt(0) + propertyType.slice(1).toLowerCase()} for ${priceType === 'SALE' ? 'sale' : 'rent'} in ${location || district}, Uganda. ${formatPrice(price, currency)}. Contact Glomon Homes today.`
+  const seoImage = coverImage || DEFAULT_IMAGE
+
+  const listingSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateListing',
+    name: title,
+    description: description,
+    url: `https://glomonhomes.com/listings/${id}`,
+    image: seoImage,
+    offers: {
+      '@type': 'Offer',
+      price: price,
+      priceCurrency: currency || 'UGX',
+      availability: status === 'ACTIVE' ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock',
+    },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: district,
+      streetAddress: address || location,
+      addressCountry: 'UG',
+    },
+  }
+
   return (
     <div className="min-h-screen bg-bg">
+      <SEO
+        title={seoTitle}
+        description={seoDescription}
+        image={seoImage}
+        type="article"
+      />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(listingSchema)}</script>
+      </Helmet>
       <Navbar />
 
       <div className="pt-24">

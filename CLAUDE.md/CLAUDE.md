@@ -457,3 +457,54 @@ dist/
 8. **Pagination:** Default page size is 12. Always return `{ data, total, page, totalPages }` from paginated endpoints
 9. **CORS:** Configure Express to allow requests from `http://localhost:5173` in development and the Vercel domain in production
 10. **Error responses:** Always return `{ error: "message" }` format from the API — never expose stack traces in production
+
+---
+
+## SEO Implementation (applied 2026-04-01)
+
+### Package
+- `react-helmet-async` installed in `frontend/` — wraps `<App />` with `<HelmetProvider>` in `main.jsx`
+
+### SEO Component
+- `frontend/src/components/SEO.jsx` — reusable component using `react-helmet-async`
+- Sets `<title>`, meta description, canonical URL, Open Graph tags, and Twitter Card tags
+- Auto-computes canonical from `useLocation()` against `https://glomonhomes.com`
+- Appends `| Glomon Homes` to titles that don't already contain the brand name
+- Accepts: `title`, `description`, `image`, `type`, `noindex` props
+
+### Per-page SEO
+| Page | Title | Notes |
+|------|-------|-------|
+| HomePage | Glomon Homes \| Buy, Rent & Invest in Uganda Real Estate | + Organization JSON-LD schema (RealEstateAgent) |
+| ListingsPage | Property Listings in Uganda \| Houses, Apartments & Land | H1 updated to "Properties for Sale & Rent in Uganda" |
+| PropertyDetailPage | `{title} in {location}` (dynamic) | + RealEstateListing JSON-LD schema; rendered after property loads |
+| AboutPage | About Glomon Homes \| Uganda's Trusted Real Estate Company | — |
+| ContactPage | Contact Glomon Homes \| Real Estate Enquiries in Uganda | — |
+
+### Structured Data (JSON-LD)
+- **HomePage:** `RealEstateAgent` schema with address, phone, sameAs social links
+- **PropertyDetailPage:** `RealEstateListing` schema with offer price, address, image
+
+### index.html changes
+- Updated `<title>` and meta description
+- Added `<meta name="robots" content="index, follow">`
+- Added `<meta property="og:site_name" content="Glomon Homes">`
+- `preconnect` links for Google Fonts already present (kept)
+
+### Semantic HTML
+- `PropertyCard.jsx`: descriptive `aria-label` on `<Link>`, descriptive `alt` text on `<img>`
+- `HomePage` hero `<section>`: `aria-label="Hero — Find property in Uganda"`
+- Featured section heading updated to "Featured Properties in Uganda"
+- Locations section heading updated to "Properties Across Uganda"
+
+### robots.txt
+- `frontend/public/robots.txt` — allows all, disallows `/admin`, references sitemap
+
+### Sitemap
+- `GET /sitemap.xml` endpoint in `backend/src/index.js`
+- Queries all `ACTIVE` properties from the database
+- Returns valid XML sitemap with static pages + per-property URLs
+- Property `lastmod` derived from `updatedAt`
+
+### Vite build optimisation
+- `frontend/vite.config.js` updated with `manualChunks` splitting `vendor` (react, react-dom, react-router-dom) and `ui` (lucide-react, axios)

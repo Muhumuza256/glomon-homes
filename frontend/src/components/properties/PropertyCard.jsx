@@ -32,13 +32,14 @@ export default function PropertyCard({ property }) {
   return (
     <Link
       to={`/listings/${id}`}
+      aria-label={`View ${title} - ${propertyType} for ${priceType === 'SALE' ? 'sale' : 'rent'} in ${location}`}
       className="group block bg-surface rounded-[4px] overflow-hidden border border-border hover:border-[#1A1A1A]/30 shadow-card hover:shadow-card-hover transition-all duration-300"
     >
       {/* Image */}
       <div className="relative h-52 overflow-hidden bg-[#F0F0EE]">
         <img
           src={getPropertyImage(coverImage)}
-          alt={title}
+          alt={`${bedrooms ? bedrooms + '-bedroom ' : ''}${propertyType.charAt(0) + propertyType.slice(1).toLowerCase()} for ${priceType === 'SALE' ? 'sale' : 'rent'} in ${location}, Uganda`}
           className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
           loading="lazy"
         />

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import api from '../services/api'
 import {
   Search, Shield, Star, TrendingUp, Building2,
@@ -11,6 +12,26 @@ import Footer from '../components/layout/Footer'
 import PropertyGrid from '../components/properties/PropertyGrid'
 import Spinner from '../components/ui/Spinner'
 import { useFeaturedProperties } from '../hooks/useProperties'
+import SEO from '../components/SEO'
+
+const ORG_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'RealEstateAgent',
+  name: 'Glomon Homes',
+  url: 'https://glomonhomes.com',
+  description: "Uganda's trusted real estate company for buying, renting and investing in verified property across Kampala, Wakiso, Entebbe and beyond.",
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Plot 45, Kira Road',
+    addressLocality: 'Kampala',
+    addressCountry: 'UG',
+  },
+  telephone: '+256704079274',
+  sameAs: [
+    'https://www.instagram.com/glomon_homes_co._ltd',
+    'https://www.tiktok.com/@glomon_homes_co_ltd',
+  ],
+}
 
 const WHY_US = [
   {
@@ -189,10 +210,18 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <SEO
+        title="Glomon Homes | Buy, Rent & Invest in Uganda Real Estate"
+        description="Find verified houses, apartments and land for sale or rent in Kampala, Wakiso, Entebbe and across Uganda. Glomon Homes — Find Your Place in Uganda."
+      />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(ORG_SCHEMA)}</script>
+      </Helmet>
       <Navbar />
 
       {/* ── Hero with auto-slideshow ──────────────────────────────────────── */}
       <section
+        aria-label="Hero — Find property in Uganda"
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
         onMouseEnter={() => { pauseRef.current = true }}
         onMouseLeave={() => { pauseRef.current = false }}
@@ -303,7 +332,7 @@ export default function HomePage() {
           <div className="flex items-end justify-between mb-10">
             <div>
               <p className="text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-2">Handpicked for you</p>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-text-main">Featured Properties</h2>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-text-main">Featured Properties in Uganda</h2>
             </div>
             <Link to="/listings?featured=true" className="hidden sm:flex items-center gap-1 text-sm text-primary font-medium hover:text-primary-light transition-colors">
               View all <ChevronRight size={15} />
@@ -365,7 +394,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8">
             <p className="text-accent font-semibold text-xs uppercase tracking-[0.15em] mb-2">We operate across</p>
-            <h2 className="font-display text-3xl font-bold text-text-main">Locations We Cover</h2>
+            <h2 className="font-display text-3xl font-bold text-text-main">Properties Across Uganda</h2>
           </div>
           <div className="flex flex-wrap justify-center gap-3">
             {LOCATIONS.map(({ name, area }) => (

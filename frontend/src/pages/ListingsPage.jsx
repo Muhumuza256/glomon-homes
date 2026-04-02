@@ -6,6 +6,7 @@ import Footer from '../components/layout/Footer'
 import PropertyGrid from '../components/properties/PropertyGrid'
 import PropertyFilters from '../components/properties/PropertyFilters'
 import { useProperties } from '../hooks/useProperties'
+import SEO from '../components/SEO'
 
 const SORT_OPTIONS = [
   { value: 'newest', label: 'Newest First' },
@@ -63,16 +64,20 @@ export default function ListingsPage() {
 
   return (
     <div className="min-h-screen bg-bg">
+      <SEO
+        title="Property Listings in Uganda | Houses, Apartments & Land — Glomon Homes"
+        description="Browse verified property listings across Uganda. Filter by location, price, and type. Apartments, houses and land for sale or rent in Kampala and beyond."
+      />
       <Navbar />
 
       {/* Page header */}
       <div className="bg-primary pt-24 pb-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-1">
-            Property Listings
+            Properties for Sale &amp; Rent in Uganda
           </h1>
           <p className="text-white/65 text-sm">
-            Browse verified properties across Uganda
+            Browse our verified listings of houses, apartments, and land for sale or rent across Kampala, Wakiso, Entebbe, Mukono and the greater Uganda region.
           </p>
         </div>
       </div>

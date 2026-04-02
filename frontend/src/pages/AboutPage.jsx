@@ -2,6 +2,7 @@ import { MapPin, Phone, Mail, Clock, MessageCircle, Shield, Star, TrendingUp, He
 import { Link } from 'react-router-dom'
 import Navbar from '../components/layout/Navbar'
 import Footer from '../components/layout/Footer'
+import SEO from '../components/SEO'
 
 const STATS = [
   { value: '12+', label: 'Active Listings' },
@@ -44,6 +45,10 @@ const WA_NUMBER = '256704079274'
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-bg">
+      <SEO
+        title="About Glomon Homes | Uganda's Trusted Real Estate Company"
+        description="Learn about Glomon Homes — a Kampala-based real estate company helping Ugandans and diaspora investors find, buy and invest in verified quality property across Uganda."
+      />
       <Navbar />
 
       {/* ── Page Header ───────────────────────────────────────────────────── */}
