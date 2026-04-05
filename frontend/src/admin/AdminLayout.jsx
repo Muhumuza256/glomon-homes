@@ -33,7 +33,6 @@ function SidebarContent({ onClose }) {
             src="/logo-icon.svg"
             alt="Glomon Homes Logo"
             className="h-8 w-auto shrink-0"
-            style={{ filter: 'brightness(0) invert(1)' }}
           />
           <div className="leading-tight">
             <p className="font-display font-bold text-white text-sm">Glomon Homes</p>

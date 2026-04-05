@@ -43,7 +43,6 @@ export default function Footer() {
                 src="/logo-icon.svg"
                 alt="Glomon Homes Logo"
                 className="h-11 w-auto shrink-0"
-                style={{ filter: 'brightness(0) invert(1)' }}
               />
               <div className="flex flex-col leading-none">
                 <span className="font-display font-bold text-[20px] tracking-[0.05em] text-white">
