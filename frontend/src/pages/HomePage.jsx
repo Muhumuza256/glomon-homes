@@ -18,7 +18,7 @@ const ORG_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'RealEstateAgent',
   name: 'Glomon Homes',
-  url: 'https://glomonhomes.com',
+  url: 'https://www.glomonhomes.online',
   description: "Uganda's trusted real estate company for buying, renting and investing in verified property across Kampala, Wakiso, Entebbe and beyond.",
   address: {
     '@type': 'PostalAddress',

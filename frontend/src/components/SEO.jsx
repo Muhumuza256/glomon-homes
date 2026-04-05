@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
 
-const SITE_URL = 'https://glomonhomes.com'
+const SITE_URL = 'https://www.glomonhomes.online'
 const DEFAULT_IMAGE = 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80'
 const DEFAULT_DESCRIPTION = 'Find verified houses, apartments and land for sale or rent in Kampala, Wakiso, Entebbe and across Uganda. Glomon Homes — Find Your Place in Uganda.'
 

@@ -18,14 +18,16 @@ const PORT = process.env.PORT || 5000
 // CORS
 const allowedOrigins = [
   'http://localhost:5173',
+  'https://glomonhomes.online',
+  'https://www.glomonhomes.online',
   process.env.FRONTEND_URL,
 ].filter(Boolean)
 
 app.use(cors({
   origin: (origin, callback) => {
-    // Allow requests with no origin (mobile apps, curl, Render health checks)
+    // Allow requests with no origin (mobile apps, curl, health checks)
     if (!origin) return callback(null, true)
-    // Allow any Vercel preview/production URL for this project
+    // Allow any Vercel preview/production URL or explicitly listed origin
     if (
       allowedOrigins.includes(origin) ||
       /\.vercel\.app$/.test(origin)
@@ -46,7 +48,7 @@ app.get('/sitemap.xml', async (req, res) => {
       where: { status: 'ACTIVE' },
       select: { id: true, updatedAt: true },
     })
-    const BASE = 'https://glomonhomes.com'
+    const BASE = 'https://www.glomonhomes.online'
     const staticPages = [
       { loc: `${BASE}/`, changefreq: 'weekly', priority: '1.0' },
       { loc: `${BASE}/listings`, changefreq: 'daily', priority: '0.8' },

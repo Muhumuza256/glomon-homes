@@ -137,7 +137,7 @@ export default function PropertyDetailPage() {
     '@type': 'RealEstateListing',
     name: title,
     description: description,
-    url: `https://glomonhomes.com/listings/${id}`,
+    url: `https://www.glomonhomes.online/listings/${id}`,
     image: seoImage,
     offers: {
       '@type': 'Offer',
