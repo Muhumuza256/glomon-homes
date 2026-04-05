@@ -61,7 +61,8 @@ export default function AdminLoginPage() {
           <img
             src="/logo-icon.svg"
             alt="Glomon Homes Logo"
-            className="h-16 w-auto mx-auto mb-4 brightness-0 invert"
+            className="h-16 w-auto mx-auto mb-4"
+            style={{ filter: 'brightness(0) invert(1)' }}
           />
           <h1 className="font-display font-bold text-white text-2xl">Glomon Homes</h1>
           <p className="text-white/50 text-sm mt-1">Admin Portal</p>
