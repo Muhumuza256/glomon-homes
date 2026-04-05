@@ -38,13 +38,20 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
           {/* Brand column */}
           <div className="lg:col-span-1">
-            <div className="mb-5 flex flex-col leading-none">
-              <span className="font-display font-bold text-[20px] tracking-[0.05em] text-white">
-                GLOMON<span className="text-accent"> HOMES</span>
-              </span>
-              <span className="text-[7px] font-semibold tracking-[0.35em] uppercase text-white/35 mt-1">
-                Real Estate Uganda
-              </span>
+            <div className="mb-5 flex items-center gap-3 leading-none">
+              <img
+                src="/logo-icon.svg"
+                alt="Glomon Homes Logo"
+                className="h-11 w-auto shrink-0 brightness-0 invert"
+              />
+              <div className="flex flex-col leading-none">
+                <span className="font-display font-bold text-[20px] tracking-[0.05em] text-white">
+                  GLOMON<span className="text-accent"> HOMES</span>
+                </span>
+                <span className="text-[7px] font-semibold tracking-[0.35em] uppercase text-white/35 mt-1">
+                  Real Estate Uganda
+                </span>
+              </div>
             </div>
             <p className="text-white/55 text-[13px] leading-relaxed mb-6 max-w-[240px]">
               Find Your Place in Uganda. Verified listings across Kampala, Wakiso, Entebbe, Mukono and beyond.

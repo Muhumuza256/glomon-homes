@@ -83,18 +83,25 @@ export default function Navbar() {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-[60px]">
-            {/* Wordmark */}
-            <Link to="/" className="flex flex-col leading-none">
-              <span className={`font-display font-bold text-[18px] tracking-[0.05em] transition-colors ${
-                transparent ? 'text-white' : 'text-[#1A1A1A]'
-              }`}>
-                GLOMON<span className="text-accent"> HOMES</span>
-              </span>
-              <span className={`text-[7px] font-semibold tracking-[0.35em] uppercase transition-colors ${
-                transparent ? 'text-white/50' : 'text-text-muted/70'
-              }`}>
-                Real Estate Uganda
-              </span>
+            {/* Logo + Wordmark */}
+            <Link to="/" className="flex items-center gap-2.5 leading-none">
+              <img
+                src="/logo-icon.svg"
+                alt="Glomon Homes Logo"
+                className="h-9 w-auto shrink-0"
+              />
+              <div className="flex flex-col leading-none">
+                <span className={`font-display font-bold text-[18px] tracking-[0.05em] transition-colors ${
+                  transparent ? 'text-white' : 'text-[#1A1A1A]'
+                }`}>
+                  GLOMON<span className="text-accent"> HOMES</span>
+                </span>
+                <span className={`text-[7px] font-semibold tracking-[0.35em] uppercase transition-colors ${
+                  transparent ? 'text-white/50' : 'text-text-muted/70'
+                }`}>
+                  Real Estate Uganda
+                </span>
+              </div>
             </Link>
 
             {/* Desktop nav */}

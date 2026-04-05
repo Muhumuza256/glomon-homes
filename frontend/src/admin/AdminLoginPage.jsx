@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Home, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { Eye, EyeOff, AlertCircle } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import api from '../services/api'
 import Spinner from '../components/ui/Spinner'
@@ -58,9 +58,11 @@ export default function AdminLoginPage() {
       <div className="relative w-full max-w-sm">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
-            <Home size={22} className="text-white" />
-          </div>
+          <img
+            src="/logo-icon.svg"
+            alt="Glomon Homes Logo"
+            className="h-16 w-auto mx-auto mb-4 brightness-0 invert"
+          />
           <h1 className="font-display font-bold text-white text-2xl">Glomon Homes</h1>
           <p className="text-white/50 text-sm mt-1">Admin Portal</p>
         </div>

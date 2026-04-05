@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { NavLink, useNavigate, Link } from 'react-router-dom'
-import { LayoutDashboard, Building2, Mail, CalendarCheck, LogOut, Home, ExternalLink, Menu, X, Settings } from 'lucide-react'
+import { LayoutDashboard, Building2, Mail, CalendarCheck, LogOut, ExternalLink, Menu, X, Settings } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
 const NAV = [
@@ -29,9 +29,11 @@ function SidebarContent({ onClose }) {
           onClick={onClose}
           className="flex items-center gap-2.5"
         >
-          <div className="w-7 h-7 bg-accent rounded-lg flex items-center justify-center shrink-0">
-            <Home size={14} className="text-white" />
-          </div>
+          <img
+            src="/logo-icon.svg"
+            alt="Glomon Homes Logo"
+            className="h-8 w-auto shrink-0 brightness-0 invert"
+          />
           <div className="leading-tight">
             <p className="font-display font-bold text-white text-sm">Glomon Homes</p>
             <p className="text-white/40 text-[10px]">Admin Portal</p>

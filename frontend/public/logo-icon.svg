@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="60 8 180 216">
+  <!-- Orange card body -->
+  <rect x="60" y="8" width="180" height="215" rx="3" ry="3" fill="#E07B1A"/>
+
+  <!-- White chevron stripes — stacked upward-pointing Vs -->
+  <polygon points="150,42 60,105 60,120 150,57 240,120 240,105" fill="white"/>
+  <polygon points="150,72 60,135 60,150 150,87 240,150 240,135" fill="white"/>
+  <polygon points="150,102 60,165 60,180 150,117 240,180 240,165" fill="white"/>
+  <polygon points="150,132 60,195 60,210 150,147 240,210 240,195" fill="white"/>
+  <polygon points="150,162 60,223 240,223 150,162" fill="white"/>
+
+  <!-- Side pillars that mask chevron edges -->
+  <rect x="60"  y="120" width="28" height="103" fill="#E07B1A"/>
+  <rect x="212" y="120" width="28" height="103" fill="#E07B1A"/>
+
+  <!-- Bottom edge clean-up -->
+  <rect x="60" y="208" width="180" height="15" fill="#E07B1A"/>
+</svg>
